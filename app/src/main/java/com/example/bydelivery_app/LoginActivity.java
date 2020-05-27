@@ -8,9 +8,13 @@ import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private String clientEmail = "";
+    private String clientPassword = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,12 @@ public class LoginActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+
+        EditText textBoxEmail = (EditText) findViewById(R.id.textbox_login_email);
+        EditText textBoxPassword = (EditText) findViewById(R.id.textbox_login_password);
+
+        clientEmail = textBoxEmail.getText().toString();
+        clientPassword = textBoxPassword.getText().toString();
 
     }
 
