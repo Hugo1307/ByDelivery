@@ -22,7 +22,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    //ola
     public void efetuarLogin(View v){
 
         Intent intent = new Intent(this, HomeActivity.class);

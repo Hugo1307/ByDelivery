@@ -32,7 +32,8 @@
                 android:layout_height="35dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/user_icon">
+                android:background="@drawable/user_icon"
+                android:onClick="acederProfile">
 
             </ImageView>
 
