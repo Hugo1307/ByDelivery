@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void efetuarLogin(View v){
 
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 
         EditText textBoxEmail = (EditText) findViewById(R.id.textbox_login_email);

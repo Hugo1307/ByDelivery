@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_orders"
+        android:icon="@drawable/ic_check_box_outline_blank_black_24dp"
+        android:title="Encomendas"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/nav_shop-cart"
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        android:title="Carrinho"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Home"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/nav_partners"
+        android:icon="@drawable/ic_shopping_basket_black_24dp"
+        android:title="Parceiros"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/nav_notifications"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="Notificações"
+        android:enabled="true"/>
+
+
+
+
+
+</menu>
