@@ -26,6 +26,7 @@ public class CartFragment extends Fragment {
     private ArrayList<String> productSellers = new ArrayList<>();
     private ArrayList<Integer> productImages = new ArrayList<>();
     private ArrayList<Double> productPrices = new ArrayList<>();
+    private ArrayList<Integer> productQuantityList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,11 +47,13 @@ public class CartFragment extends Fragment {
         productNames.add("Bifana");
         productSellers.add("Restaurante do Sol");
         productPrices.add(7.50);
+        productQuantityList.add(1);
 
         productImages.add(R.drawable.hamburguer_banner);
         productNames.add("Hamburguer");
         productSellers.add("Burger Classic");
         productPrices.add(5.19);
+        productQuantityList.add(1);
 
         initRecyclerView();
 
@@ -59,7 +62,7 @@ public class CartFragment extends Fragment {
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
         RecyclerView recycler = v.findViewById(R.id.recycler_view);
-        Adapter adapter = new Adapter(getContext(), productNames, productSellers, productPrices, productImages);
+        Adapter adapter = new Adapter(getContext(), productNames, productSellers, productPrices, productQuantityList, productImages);
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
     }

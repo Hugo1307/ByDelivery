@@ -19,9 +19,9 @@
         android:text="Teste"
         android:id="@+id/productName"
         android:layout_toEndOf="@id/productImage"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="22dp"
-        android:textSize="20sp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:textSize="18sp"
         android:fontFamily="@font/roboto_medium"/>
 
     <TextView
@@ -31,28 +31,68 @@
         android:text="[Parceiro]"
         android:layout_below="@id/productName"
         android:layout_toEndOf="@id/productImage"
-        android:layout_marginStart="20dp"
-        android:textSize="16sp"
+        android:layout_marginStart="15dp"
+        android:textSize="14sp"
         android:fontFamily="@font/roboto_medium"/>
 
     <TextView
         android:id="@+id/productPrice"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:fontFamily="@font/roboto_medium"
         android:textSize="18sp"
-        android:layout_marginEnd="10dp"
+        android:textAlignment="center"
         android:text="[Preço]"/>
+
+    <RelativeLayout
+        android:id="@+id/productQuantityPanel"
+        android:layout_width="40dp"
+        android:layout_height="80dp"
+        android:layout_toLeftOf="@id/productPrice"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="3dp">
+
+        <ImageView
+            android:id="@+id/productAddQuantity"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_add_black_24dp" />
+
+        <TextView
+            android:id="@+id/productQuantity"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:text="1"/>
+
+        <ImageView
+            android:id="@+id/productRemoveQuantity"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_remove_black_24dp" />
+
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/productDelete"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_toStartOf="@id/productPrice"
-        android:layout_marginEnd="20dp"
+        android:layout_toStartOf="@id/productQuantityPanel"
+        android:layout_marginEnd="5dp"
         android:layout_centerVertical="true"
         android:src="@drawable/ic_delete_black_24dp" />
+
+
 
 </RelativeLayout>
