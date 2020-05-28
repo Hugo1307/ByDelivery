@@ -25,14 +25,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
     private ArrayList<Integer> productImages = new ArrayList<>();
     private ArrayList<String> productSellers = new ArrayList<>();
     private ArrayList<Double> productPrices = new ArrayList<>();
+    private ArrayList<Integer> productQuantityList = new ArrayList<>();
     private Context mContext;
 
     public Adapter(Context mContext, ArrayList<String> productNames, ArrayList<String> productSellers,
-                   ArrayList<Double> productPrices, ArrayList<Integer> productImages) {
+                   ArrayList<Double> productPrices, ArrayList<Integer> productQuantityList, ArrayList<Integer> productImages) {
         this.productNames = productNames;
         this.productSellers = productSellers;
         this.productImages = productImages;
         this.productPrices = productPrices;
+        this.productQuantityList = productQuantityList;
         this.mContext = mContext;
     }
 
@@ -51,7 +53,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         holder.image.setImageResource(productImages.get(position));
         holder.productName.setText(productNames.get(position));
         holder.partnerName.setText(productSellers.get(position));
-        holder.productPrice.setText(String.valueOf(productPrices.get(position)));
+        holder.productPrice.setText(String.valueOf(productPrices.get(position)) + "€");
+        holder.productQuantity.setText(String.valueOf(productQuantityList.get(position)));
 
         holder.productDelete.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
@@ -60,6 +63,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
                 Log.d(TAG, "onLongClick: clicked on: " + productNames.get(position));
 
                 productNames.remove(position);
+                productImages.remove(position);
+                productPrices.remove(position);
+                productQuantityList.remove(position);
+                productSellers.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, productNames.size());
 
@@ -72,6 +79,27 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on: " + position);
                 Toast.makeText(mContext, "Mantenha pressionado para eliminar", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.addQuantity.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: addQuantity: " + position);
+                productQuantityList.set(position, productQuantityList.get(position) + 1);
+                notifyItemChanged(position);
+            }
+        });
+        holder.removeQuantity.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: removeQuantity: " + position);
+                int quantidadeProduto = productQuantityList.get(position);
+
+                if (quantidadeProduto > 1) {
+                    productQuantityList.set(position, productQuantityList.get(position) - 1);
+                    notifyItemChanged(position);
+                }
             }
         });
     }
@@ -88,6 +116,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         TextView partnerName;
         TextView productPrice;
         ImageView productDelete;
+        ImageView addQuantity;
+        ImageView removeQuantity;
+        TextView productQuantity;
         RelativeLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView) {
@@ -99,6 +130,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
             productPrice = itemView.findViewById(R.id.productPrice);
             productDelete = itemView.findViewById(R.id.productDelete);
             parentLayout = itemView.findViewById(R.id.parent_layout);
+            addQuantity = itemView.findViewById(R.id.productAddQuantity);
+            removeQuantity = itemView.findViewById(R.id.productRemoveQuantity);
+            productQuantity = itemView.findViewById(R.id.productQuantity);
+
 
         }
 
