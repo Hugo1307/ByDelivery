@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ByDelivery</string>
     <string name="website_link"><a href="http://citymarkeet.000webhostapp.com/">Saiba Mais</a></string>
+    <string name="cartTitle">Carrinho</string>
+    <string name="entregaNormal">Entrega Normal</string>
+    <string name="entregaExpresso">Entrega Expresso</string>
 </resources>
