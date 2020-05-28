@@ -5,13 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/backgroudWhite"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-28dp">
 
-            <RelativeLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="@color/colorPrimary"
@@ -38,9 +41,9 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginEnd="25dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:layout_marginEnd="25dp"
                 android:background="@drawable/search_icon">
 
             </ImageView>
@@ -48,29 +51,31 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="204dp"
+            android:layout_width="match_parent"
             android:layout_height="233dp"
             android:gravity='center'>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_margin="10dp"
-                app:cardCornerRadius="50dp"
+                app:cardCornerRadius="30dp"
                 app:cardElevation="0dp">
 
                 <ImageView
-                    android:layout_width="110dp"
-                    android:layout_height="109dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginEnd="25dp"
+                    android:layout_marginRight="-100dp"
                     android:background="@drawable/fotodeperfil"
                     android:scaleType="centerCrop"
                     tools:ignore='ContentDescription'>
 
                 </ImageView>
             </androidx.cardview.widget.CardView>
+
         </RelativeLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
