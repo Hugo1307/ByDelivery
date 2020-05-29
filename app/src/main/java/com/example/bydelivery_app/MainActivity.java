@@ -30,14 +30,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void abrirPerfil(View v){
 
-        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ProfileFragment.class);
         startActivity(intent);
 
     }
 
     public void testeDeNome(View v){
 
-        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ProfileFragment.class);
         startActivity(intent);
 
     }
