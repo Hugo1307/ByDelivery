@@ -1,27 +1,22 @@
 package com.example.bydelivery_app;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class CartFragment extends Fragment {
 
     private static final String TAG = "CartFragment";
-    private View v;
+    private static View v;
     private ArrayList<String> productNames = new ArrayList<>();
     private ArrayList<String> productSellers = new ArrayList<>();
     private ArrayList<Integer> productImages = new ArrayList<>();
@@ -59,18 +54,38 @@ public class CartFragment extends Fragment {
 
     }
 
+    static void updatePriceEvaluation(double totalPrice,double deliveryPrice, double iva, double productsTotalPrice){
+
+        Log.d(TAG, "updatePriceEvaluation: called");
+        
+        TextView labelTotalPrice = v.findViewById(R.id.label_totalPrice);
+        TextView labelDeliveryPrice = v.findViewById(R.id.label_entregaPrice);
+        TextView labelIvaPrice = v.findViewById(R.id.label_totalIVA);
+        TextView labelProductsPrice = v.findViewById(R.id.label_productsTotalPrice);
+
+        labelTotalPrice.setText(v.getContext().getString(R.string.totalPrice, String.valueOf(totalPrice)));
+        labelDeliveryPrice.setText(v.getContext().getString(R.string.deliveyPrice, String.valueOf(deliveryPrice)));
+        labelIvaPrice.setText(v.getContext().getString(R.string.ivaPrice, String.valueOf(iva)));
+        labelProductsPrice.setText(v.getContext().getString(R.string.totalProductsPrice, String.valueOf(productsTotalPrice)));
+
+        if (productsTotalPrice == 0) {
+            v.findViewById(R.id.emptyCart).setVisibility(View.VISIBLE);
+            v.findViewById(R.id.recycler_view).setVisibility(View.INVISIBLE);
+        }else{
+            v.findViewById(R.id.emptyCart).setVisibility(View.INVISIBLE);
+            v.findViewById(R.id.recycler_view).setVisibility(View.VISIBLE);
+        }
+
+    }
+
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
         RecyclerView recycler = v.findViewById(R.id.recycler_view);
-        Adapter adapter = new Adapter(getContext(), productNames, productSellers, productPrices, productQuantityList, productImages);
+        AdapterCartList adapter = new AdapterCartList(getContext(), productNames, productSellers, productPrices, productQuantityList, productImages);
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
-    public void testeDeNome(@NotNull View v){
 
-        productNames.remove(productNames.size()-1);
-
-    }
 
 }

@@ -4,4 +4,9 @@
     <string name="cartTitle">Carrinho</string>
     <string name="entregaNormal">Entrega Normal</string>
     <string name="entregaExpresso">Entrega Expresso</string>
+    <string name="totalPrice">Total: %1$s €</string>
+    <string name="totalProductsPrice">Produtos: %1$s €</string>
+    <string name="deliveyPrice">Entrega: %1$s €</string>
+    <string name="ivaPrice">IVA: %1$s €</string>
+    <string name="emptyCart">Carrinho Vazio</string>
 </resources>

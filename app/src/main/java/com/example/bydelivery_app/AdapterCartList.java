@@ -13,23 +13,25 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bydelivery_app.Handler.NewMath;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
+public class AdapterCartList extends RecyclerView.Adapter<AdapterCartList.ViewHolder>{
 
-    private static final String TAG = "Adapter";
+    private static final String TAG = "AdapterCartList";
 
-    private ArrayList<String> productNames = new ArrayList<>();
-    private ArrayList<Integer> productImages = new ArrayList<>();
-    private ArrayList<String> productSellers = new ArrayList<>();
-    private ArrayList<Double> productPrices = new ArrayList<>();
-    private ArrayList<Integer> productQuantityList = new ArrayList<>();
+    private ArrayList<String> productNames;
+    private ArrayList<Integer> productImages;
+    private ArrayList<String> productSellers;
+    private ArrayList<Double> productPrices;
+    private ArrayList<Integer> productQuantityList;
     private Context mContext;
 
-    public Adapter(Context mContext, ArrayList<String> productNames, ArrayList<String> productSellers,
-                   ArrayList<Double> productPrices, ArrayList<Integer> productQuantityList, ArrayList<Integer> productImages) {
+    AdapterCartList(Context mContext, ArrayList<String> productNames, ArrayList<String> productSellers,
+                    ArrayList<Double> productPrices, ArrayList<Integer> productQuantityList, ArrayList<Integer> productImages) {
         this.productNames = productNames;
         this.productSellers = productSellers;
         this.productImages = productImages;
@@ -43,6 +45,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem, parent, false);
         ViewHolder holder = new ViewHolder(view);
+
+        calcPriceOfOrder();
+
         return holder;
     }
 
@@ -69,6 +74,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
                 productSellers.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, productNames.size());
+                calcPriceOfOrder();
 
                 return true;
             }
@@ -88,20 +94,24 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
                 Log.d(TAG, "onClick: addQuantity: " + position);
                 productQuantityList.set(position, productQuantityList.get(position) + 1);
                 notifyItemChanged(position);
+                calcPriceOfOrder();
             }
         });
         holder.removeQuantity.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: removeQuantity: " + position);
-                int quantidadeProduto = productQuantityList.get(position);
 
-                if (quantidadeProduto > 1) {
+                int productQuantity = productQuantityList.get(position);
+                Log.d(TAG, "onClick: removeQuantity: " + position);
+
+                if (productQuantity > 1) {
                     productQuantityList.set(position, productQuantityList.get(position) - 1);
                     notifyItemChanged(position);
+                    calcPriceOfOrder();
                 }
             }
         });
+
     }
 
     @Override
@@ -109,7 +119,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         return productNames.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
 
         CircleImageView image;
         TextView productName;
@@ -121,7 +131,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         TextView productQuantity;
         RelativeLayout parentLayout;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             image = itemView.findViewById(R.id.productImage);
@@ -134,9 +144,25 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
             removeQuantity = itemView.findViewById(R.id.productRemoveQuantity);
             productQuantity = itemView.findViewById(R.id.productQuantity);
 
-
         }
 
+    }
+
+    private void calcPriceOfOrder() {
+
+        Log.d(TAG, "calcPriceOfOrder: called");
+
+        double totalPrice, deliveryPrice = 0, iva, productsTotalPrice = 0;
+
+        for (int i = 0; i < productNames.size(); i++){
+            productsTotalPrice += productPrices.get(i) * productQuantityList.get(i);
+        }
+
+        iva = (productsTotalPrice + deliveryPrice) * 0.23;
+        totalPrice = productsTotalPrice + iva;
+
+        CartFragment.updatePriceEvaluation(NewMath.round(totalPrice, 2), NewMath.round(deliveryPrice, 2),
+                NewMath.round(iva, 2), NewMath.round(productsTotalPrice, 2));
     }
 
 }

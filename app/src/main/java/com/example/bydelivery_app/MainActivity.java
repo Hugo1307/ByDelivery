@@ -3,15 +3,21 @@ package com.example.bydelivery_app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.example.bydelivery_app.Handler.FragmentChangeListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity implements FragmentChangeListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +32,10 @@ public class MainActivity extends AppCompatActivity {
                     new HomeFragment()).commit();
             bottomNav.setSelectedItemId(R.id.nav_home);
         }
+
     }
 
     public void abrirPerfil(View v){
-
-        Intent intent = new Intent(getApplicationContext(), ProfileFragment.class);
-        startActivity(intent);
-
-    }
-
-    public void testeDeNome(View v){
 
         Intent intent = new Intent(getApplicationContext(), ProfileFragment.class);
         startActivity(intent);
@@ -61,4 +61,12 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+    @Override
+    public void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();;
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment, fragment.toString());
+        fragmentTransaction.addToBackStack(fragment.toString());
+        fragmentTransaction.commit();
+    }
 }

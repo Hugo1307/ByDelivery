@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -14,9 +14,11 @@
         <RelativeLayout
             android:id="@+id/topLoginPanel"
             android:layout_width="match_parent"
-            android:layout_height="320dp"
+            android:layout_height="0dp"
             android:background="@drawable/azul_login_waved"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHeight_percent="0.38">
 
             <ImageView
                 android:id="@+id/login_company_icon"
@@ -46,8 +48,10 @@
         </RelativeLayout>
 
         <RelativeLayout
+            app:layout_constraintTop_toBottomOf="@id/topLoginPanel"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.62"
             android:background="#FFFFFF">
 
             <TextView
@@ -55,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginHorizontal="50dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="30dp"
                 android:fontFamily="@font/roboto_medium"
                 android:text="Email"
                 android:textColor="@color/colorPrimary"
@@ -116,7 +120,7 @@
                 android:layout_height="50dp"
                 android:layout_below="@+id/textbox_login_password"
                 android:layout_marginHorizontal="80dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/rounded_button"
                 android:text="Entrar"
                 android:onClick="efetuarLogin">
@@ -129,7 +133,7 @@
                 android:layout_height="20dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginHorizontal="50dp"
-                android:layout_marginBottom="70dp"
+                android:layout_marginBottom="60dp"
                 android:fontFamily="@font/roboto_medium"
                 android:textColor="@color/textLightGray"
                 android:textSize="16sp"
@@ -143,7 +147,7 @@
                 android:layout_height="20dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginHorizontal="50dp"
-                android:layout_marginBottom="45dp"
+                android:layout_marginBottom="40dp"
                 android:fontFamily="@font/roboto_medium"
                 android:linksClickable="true"
                 android:text="@string/website_link"
@@ -155,7 +159,7 @@
 
         </RelativeLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
