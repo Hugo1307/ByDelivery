@@ -9,4 +9,7 @@
     <string name="deliveyPrice">Entrega: %1$s €</string>
     <string name="ivaPrice">IVA: %1$s €</string>
     <string name="emptyCart">Carrinho Vazio</string>
+    <string name="productDescription">Os Hamburguers artesanais são feitos com um tipo especial de molho, o que os torna tão especiais e saborosos.
+    Para além disso, a nossa carne é 100% certificada e os animais de onde esta provem 100% biológicos.\n\n
+        Não adicionamos nenhum tipo de corante nem conservante para que possa sentir confiança e tranquilidade enquanto desfruta do nosso hambúrguer.</string>
 </resources>

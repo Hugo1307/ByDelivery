@@ -6,6 +6,7 @@
     app:layout_constraintWidth_percent="0.5">
 
     <RelativeLayout
+        android:id="@+id/productLayout"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         app:layout_constraintTop_toTopOf="parent"

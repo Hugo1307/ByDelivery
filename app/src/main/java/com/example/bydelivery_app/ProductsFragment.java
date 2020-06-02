@@ -10,10 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bydelivery_app.Handler.ItemOffsetDecoration;
+import com.example.bydelivery_app.Handler.FragmentChangeListener;
 
 import java.util.ArrayList;
 
@@ -21,7 +20,7 @@ public class ProductsFragment extends Fragment {
 
     private static final String TAG = "ProductsFragment";
 
-    private View v;
+    private static View v;
     private ArrayList<String> productNames = new ArrayList<>();
     private ArrayList<String> productSellers = new ArrayList<>();
     private ArrayList<Integer> productImages = new ArrayList<>();
@@ -41,6 +40,11 @@ public class ProductsFragment extends Fragment {
 
     private void initRecyclerMap(){
 
+        productImages.clear();
+        productNames.clear();
+        productSellers.clear();
+        productPrices.clear();
+
         productImages.add(R.drawable.binafa_banner);
         productNames.add("Bifana");
         productSellers.add("Restaurante do Sole");
@@ -58,11 +62,18 @@ public class ProductsFragment extends Fragment {
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
         RecyclerView recycler = v.findViewById(R.id.recycler_view);
+
         AdapterProductsList adapter = new AdapterProductsList(getContext(), productNames, productSellers, productPrices, productImages);
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getContext(), R.dimen.offset);
-        recycler.addItemDecoration(itemDecoration);
+    }
+
+    static void openProduct(){
+
+        Fragment fr = new ProductDetailsFragment();
+        FragmentChangeListener fc = (FragmentChangeListener) v.getContext();
+        fc.replaceFragment(fr);
+
     }
 
 }

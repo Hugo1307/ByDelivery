@@ -8,16 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bydelivery_app.Handler.NewMath;
-
 import java.util.ArrayList;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AdapterProductsList extends RecyclerView.Adapter<AdapterProductsList.ViewHolder>{
 
@@ -58,6 +53,17 @@ public class AdapterProductsList extends RecyclerView.Adapter<AdapterProductsLis
         holder.partnerName.setText(productSellers.get(position));
         holder.productPrice.setText(String.valueOf(productPrices.get(position)) + "€");
 
+        holder.productLayout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                Log.d(TAG, "onClick: clicked on: " + productNames.get(position));
+
+                ProductsFragment.openProduct();
+
+            }
+        });
+
     }
 
     @Override
@@ -67,6 +73,7 @@ public class AdapterProductsList extends RecyclerView.Adapter<AdapterProductsLis
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
+        RelativeLayout productLayout;
         ImageView productImage;
         TextView productName;
         TextView partnerName;
@@ -77,11 +84,11 @@ public class AdapterProductsList extends RecyclerView.Adapter<AdapterProductsLis
         ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            productLayout = itemView.findViewById(R.id.productLayout);
             productImage = itemView.findViewById(R.id.productImage2);
             productName = itemView.findViewById(R.id.productName2);
             partnerName = itemView.findViewById(R.id.productSellerName2);
             productPrice = itemView.findViewById(R.id.productPrice2);
-
 
         }
 

@@ -22,6 +22,7 @@ public class CartFragment extends Fragment {
     private ArrayList<Integer> productImages = new ArrayList<>();
     private ArrayList<Double> productPrices = new ArrayList<>();
     private ArrayList<Integer> productQuantityList = new ArrayList<>();
+    AdapterCartList adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,12 +32,13 @@ public class CartFragment extends Fragment {
 
         Log.d(TAG, "onCreate: started");
 
-        initImageBitMaps();
+        initRecyclerView();
 
         return view;
     }
 
-    private void initImageBitMaps(){
+    /*
+    private void addProductsToCart(){
 
         productImages.add(R.drawable.binafa_banner);
         productNames.add("Bifana");
@@ -53,6 +55,7 @@ public class CartFragment extends Fragment {
         initRecyclerView();
 
     }
+    */
 
     static void updatePriceEvaluation(double totalPrice,double deliveryPrice, double iva, double productsTotalPrice){
 
@@ -81,11 +84,37 @@ public class CartFragment extends Fragment {
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
         RecyclerView recycler = v.findViewById(R.id.recycler_view);
-        AdapterCartList adapter = new AdapterCartList(getContext(), productNames, productSellers, productPrices, productQuantityList, productImages);
+        adapter = new AdapterCartList(getContext(), productNames, productSellers, productPrices, productQuantityList, productImages);
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        updatePriceEvaluation(0, 0, 0, 0);
     }
 
+    ///////////////////////////////////////////////////////////
+    //                  GETTERS E SETTERS
+    ///////////////////////////////////////////////////////////
+
+    void addProduct(String productName, String productSeller, int productImage, double productPrice, int productQuantity){
+
+        if (productNames.contains(productName)) {
+
+            int productIndex = productNames.indexOf(productName);
+            int currentQuantity = productQuantityList.get(productIndex);
+
+            if (productSellers.get(productIndex).equals(productSeller)) {
+                currentQuantity = currentQuantity + productQuantity;
+                productQuantityList.set(productIndex, currentQuantity);
+            }
+
+        }else{
+            this.productNames.add(productName);
+            this.productSellers.add(productSeller);
+            this.productImages.add(productImage);
+            this.productPrices.add(productPrice);
+            this.productQuantityList.add(productQuantity);
+        }
+
+    }
 
 
 }

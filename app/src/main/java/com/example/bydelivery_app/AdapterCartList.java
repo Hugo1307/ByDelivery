@@ -165,4 +165,29 @@ public class AdapterCartList extends RecyclerView.Adapter<AdapterCartList.ViewHo
                 NewMath.round(iva, 2), NewMath.round(productsTotalPrice, 2));
     }
 
+    ////////////////////////////////////////////////////////////////
+    //                      Getters e Setters
+    ////////////////////////////////////////////////////////////////
+
+
+    void setProductNames(ArrayList<String> productNames) {
+        this.productNames = productNames;
+    }
+
+    void setProductImages(ArrayList<Integer> productImages) {
+        this.productImages = productImages;
+    }
+
+    void setProductPrices(ArrayList<Double> productPrices) {
+        this.productPrices = productPrices;
+    }
+
+    void setProductQuantityList(ArrayList<Integer> productQuantityList) {
+        this.productQuantityList = productQuantityList;
+    }
+
+    void setProductSellers(ArrayList<String> productSellers) {
+        this.productSellers = productSellers;
+    }
+
 }

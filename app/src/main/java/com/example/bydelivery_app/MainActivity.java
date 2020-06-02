@@ -1,23 +1,28 @@
 package com.example.bydelivery_app;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
-
 import com.example.bydelivery_app.Handler.FragmentChangeListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends FragmentActivity implements FragmentChangeListener {
+
+    private static final String TAG = "MainActivity";
+
+    private CartFragment cartFragment = new CartFragment();
+    private HomeFragment homeFragment = new HomeFragment();
+    private ProductDetailsFragment productDetailsFragment = new ProductDetailsFragment();
+    private ProductsFragment productsFragment = new ProductsFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,15 @@ public class MainActivity extends FragmentActivity implements FragmentChangeList
             bottomNav.setSelectedItemId(R.id.nav_home);
         }
 
+        if (this.cartFragment == null) {
+            Log.d(TAG, "getCarrinho: NULLLLLLLLLLLLLL");
+            Log.d(TAG, "getCarrinho: NULLLLLLLLLLLLLL");
+            Log.d(TAG, "getCarrinho: NULLLLLLLLLLLLLL");
+            Log.d(TAG, "getCarrinho: NULLLLLLLLLLLLLL");
+        }else{
+            Log.d(TAG, "onCreate: not null");
+        }
+        
     }
 
     public void abrirPerfil(View v){
@@ -49,10 +63,10 @@ public class MainActivity extends FragmentActivity implements FragmentChangeList
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.nav_home:
-                        selectedFragment = new HomeFragment();
+                        selectedFragment = homeFragment;
                         break;
                     case R.id.nav_shop_cart:
-                        selectedFragment = new CartFragment();
+                        selectedFragment = cartFragment;
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -69,4 +83,13 @@ public class MainActivity extends FragmentActivity implements FragmentChangeList
         fragmentTransaction.addToBackStack(fragment.toString());
         fragmentTransaction.commit();
     }
+
+    ///////////////////////////////////////////////////////////
+    //                  GETTERS E SETTERS
+    ///////////////////////////////////////////////////////////
+
+    public CartFragment getCartFragment(){
+        return this.cartFragment;
+    }
+
 }
