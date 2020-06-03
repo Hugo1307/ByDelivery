@@ -91,7 +91,7 @@ public class CartFragment extends Fragment {
     }
 
     ///////////////////////////////////////////////////////////
-    //                  GETTERS E SETTERS
+    //                  GETTERS E SETTERS                    //
     ///////////////////////////////////////////////////////////
 
     void addProduct(String productName, String productSeller, int productImage, double productPrice, int productQuantity){

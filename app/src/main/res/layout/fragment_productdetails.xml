@@ -179,6 +179,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_centerVertical="true"
                 android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="Comprar já"
                 android:fontFamily="@font/lato"
                 android:textSize="13sp"/>
