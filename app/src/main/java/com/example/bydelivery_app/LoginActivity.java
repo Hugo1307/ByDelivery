@@ -1,15 +1,13 @@
 package com.example.bydelivery_app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -29,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     public void efetuarLogin(View v){
 
         Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 
         EditText textBoxEmail = (EditText) findViewById(R.id.textbox_login_email);
@@ -36,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
 
         clientEmail = textBoxEmail.getText().toString();
         clientPassword = textBoxPassword.getText().toString();
+
+        this.finish();
 
     }
 

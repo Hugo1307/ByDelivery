@@ -1,4 +1,4 @@
-package com.example.bydelivery_app;
+package com.example.bydelivery_app.fragments;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bydelivery_app.Handler.FragmentChangeListener;
+import com.example.bydelivery_app.AdapterProductsList;
+import com.example.bydelivery_app.MainActivity;
+import com.example.bydelivery_app.R;
+import com.example.bydelivery_app.handlers.FragmentChangeListener;
 
 import java.util.ArrayList;
 
@@ -20,7 +23,7 @@ public class ProductsFragment extends Fragment {
 
     private static final String TAG = "ProductsFragment";
 
-    private static View v;
+    private static View rootView;
     private ArrayList<String> productNames = new ArrayList<>();
     private ArrayList<String> productSellers = new ArrayList<>();
     private ArrayList<Integer> productImages = new ArrayList<>();
@@ -30,7 +33,7 @@ public class ProductsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_products, container, false);
-        v = view;
+        rootView = view;
 
         initRecyclerMap();
 
@@ -61,17 +64,22 @@ public class ProductsFragment extends Fragment {
 
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
-        RecyclerView recycler = v.findViewById(R.id.recycler_view);
+        RecyclerView recycler = rootView.findViewById(R.id.recycler_view);
 
         AdapterProductsList adapter = new AdapterProductsList(getContext(), productNames, productSellers, productPrices, productImages);
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(new GridLayoutManager(getContext(), 2));
     }
 
-    static void openProduct(){
+    public static void openProduct(String productName, String productSeller, int productImage, double productPrice){
 
-        Fragment fr = new ProductDetailsFragment();
-        FragmentChangeListener fc = (FragmentChangeListener) v.getContext();
+        MainActivity main = (MainActivity) rootView.getContext();
+        ProductDetailsFragment productDetailsFragment = new ProductDetailsFragment();
+
+        productDetailsFragment.applyChanges(productName, productSeller, productImage, productPrice);
+
+        Fragment fr = productDetailsFragment;
+        FragmentChangeListener fc = (FragmentChangeListener) rootView.getContext();
         fc.replaceFragment(fr);
 
     }

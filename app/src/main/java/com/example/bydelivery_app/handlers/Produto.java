@@ -1,4 +1,4 @@
-package com.example.bydelivery_app.Handler;
+package com.example.bydelivery_app.handlers;
 
 public class Produto {
     private String NomeDoProduto, NomeDoParceiro;

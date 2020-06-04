@@ -1,4 +1,4 @@
-package com.example.bydelivery_app;
+package com.example.bydelivery_app.fragments;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.bydelivery_app.AdapterCartList;
+import com.example.bydelivery_app.R;
 
 import java.util.ArrayList;
 
@@ -57,7 +60,7 @@ public class CartFragment extends Fragment {
     }
     */
 
-    static void updatePriceEvaluation(double totalPrice,double deliveryPrice, double iva, double productsTotalPrice){
+    public static void updatePriceEvaluation(double totalPrice,double deliveryPrice, double iva, double productsTotalPrice){
 
         Log.d(TAG, "updatePriceEvaluation: called");
         

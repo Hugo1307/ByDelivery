@@ -12,16 +12,21 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.bydelivery_app.Handler.FragmentChangeListener;
+import com.example.bydelivery_app.fragments.CartFragment;
+import com.example.bydelivery_app.fragments.HomeFragment;
+import com.example.bydelivery_app.fragments.NotificationsFragment;
+import com.example.bydelivery_app.fragments.ProductsFragment;
+import com.example.bydelivery_app.fragments.ProfileFragment;
+import com.example.bydelivery_app.handlers.FragmentChangeListener;
+import com.example.bydelivery_app.handlers.RecyclerValuesStorage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends FragmentActivity implements FragmentChangeListener {
 
     private static final String TAG = "MainActivity";
 
+    private Fragment currentFragment;
     private CartFragment cartFragment = new CartFragment();
-    private HomeFragment homeFragment = new HomeFragment();
-    private ProductDetailsFragment productDetailsFragment = new ProductDetailsFragment();
     private ProductsFragment productsFragment = new ProductsFragment();
 
     @Override
@@ -38,15 +43,6 @@ public class MainActivity extends FragmentActivity implements FragmentChangeList
             bottomNav.setSelectedItemId(R.id.nav_home);
         }
 
-        if (this.cartFragment == null) {
-            Log.d(TAG, "getCarrinho: NULLLLLLLLLLLLLL");
-            Log.d(TAG, "getCarrinho: NULLLLLLLLLLLLLL");
-            Log.d(TAG, "getCarrinho: NULLLLLLLLLLLLLL");
-            Log.d(TAG, "getCarrinho: NULLLLLLLLLLLLLL");
-        }else{
-            Log.d(TAG, "onCreate: not null");
-        }
-        
     }
 
     public void abrirPerfil(View v){
@@ -63,10 +59,16 @@ public class MainActivity extends FragmentActivity implements FragmentChangeList
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.nav_home:
-                        selectedFragment = homeFragment;
+                        selectedFragment = new HomeFragment();
                         break;
                     case R.id.nav_shop_cart:
                         selectedFragment = cartFragment;
+                        break;
+                    case R.id.nav_notifications:
+                        selectedFragment = new NotificationsFragment();
+                        break;
+                    default:
+                        Log.d(TAG, "onNavigationItemSelected: unknown Fragment");
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -77,19 +79,39 @@ public class MainActivity extends FragmentActivity implements FragmentChangeList
 
     @Override
     public void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();;
+        FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment, fragment.toString());
         fragmentTransaction.addToBackStack(fragment.toString());
         fragmentTransaction.commit();
     }
 
-    ///////////////////////////////////////////////////////////
-    //                  GETTERS E SETTERS
-    ///////////////////////////////////////////////////////////
+    public static void addNotification(int image, String title, String body, String notificationTime) {
 
-    public CartFragment getCartFragment(){
-        return this.cartFragment;
+        RecyclerValuesStorage.getNotificationsImages().add(image);
+        RecyclerValuesStorage.getNotificationsTitles().add(title);
+        RecyclerValuesStorage.getNotificationsBodyStrings().add(body);
+        RecyclerValuesStorage.getNotificationsHours().add(notificationTime);
+
+        Log.d(TAG, "addNotification: added new notification");
+
     }
+
+    public static void cleanNotifications(int image, String title, String body, String notificationTime) {
+
+        RecyclerValuesStorage.getNotificationsImages().clear();
+        RecyclerValuesStorage.getNotificationsTitles().clear();
+        RecyclerValuesStorage.getNotificationsBodyStrings().clear();
+        RecyclerValuesStorage.getNotificationsHours().clear();
+
+    }
+
+    /////////////////////////////////////////////////////////
+    //                GETTERS E SETTERS                    //
+    /////////////////////////////////////////////////////////
+
+    public CartFragment getCartFragment(){ return this.cartFragment; }
+
+    public ProductsFragment getProductsFragment() { return productsFragment; }
 
 }

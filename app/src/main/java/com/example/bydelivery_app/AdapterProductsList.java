@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bydelivery_app.fragments.ProductsFragment;
+
 import java.util.ArrayList;
 
 public class AdapterProductsList extends RecyclerView.Adapter<AdapterProductsList.ViewHolder>{
@@ -24,7 +26,7 @@ public class AdapterProductsList extends RecyclerView.Adapter<AdapterProductsLis
     private ArrayList<Double> productPrices;
     private Context mContext;
 
-    AdapterProductsList(Context mContext, ArrayList<String> productNames, ArrayList<String> productSellers,
+    public AdapterProductsList(Context mContext, ArrayList<String> productNames, ArrayList<String> productSellers,
                         ArrayList<Double> productPrices, ArrayList<Integer> productImages) {
         this.productNames = productNames;
         this.productSellers = productSellers;
@@ -59,7 +61,8 @@ public class AdapterProductsList extends RecyclerView.Adapter<AdapterProductsLis
 
                 Log.d(TAG, "onClick: clicked on: " + productNames.get(position));
 
-                ProductsFragment.openProduct();
+                ProductsFragment.openProduct(productNames.get(position), productSellers.get(position), productImages.get(position),
+                        productPrices.get(position));
 
             }
         });

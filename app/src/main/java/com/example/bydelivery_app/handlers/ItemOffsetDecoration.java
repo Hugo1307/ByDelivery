@@ -1,4 +1,4 @@
-package com.example.bydelivery_app.Handler;
+package com.example.bydelivery_app.handlers;
 
 import android.content.Context;
 import android.graphics.Rect;

@@ -13,7 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bydelivery_app.Handler.NewMath;
+import com.example.bydelivery_app.fragments.CartFragment;
+import com.example.bydelivery_app.handlers.NewMath;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,7 @@ public class AdapterCartList extends RecyclerView.Adapter<AdapterCartList.ViewHo
     private ArrayList<Integer> productQuantityList;
     private Context mContext;
 
-    AdapterCartList(Context mContext, ArrayList<String> productNames, ArrayList<String> productSellers,
+    public AdapterCartList(Context mContext, ArrayList<String> productNames, ArrayList<String> productSellers,
                     ArrayList<Double> productPrices, ArrayList<Integer> productQuantityList, ArrayList<Integer> productImages) {
         this.productNames = productNames;
         this.productSellers = productSellers;
