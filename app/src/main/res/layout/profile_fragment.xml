@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    tools:context=".fragments.ProfileFragment">
+    tools:context=".ProfileFragment">
 
     <RelativeLayout
         android:layout_width="410dp"
@@ -14,35 +16,176 @@
         tools:layout_editor_absoluteY="88dp">
 
         <ImageView
-
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/border_image"
             android:scaleType="centerCrop"
-            tools:ignore='ContentDescription'>
+            tools:ignore='ContentDescription'></ImageView>
 
-        </ImageView>
     </RelativeLayout>
-
     <RelativeLayout
-        android:layout_width="407dp"
+        android:layout_width="419dp"
         android:layout_height="34dp"
         android:gravity='center'
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="177dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="211dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:layout_marginTop="6dp"
             android:fontFamily="@font/roboto_medium"
             android:text="mail"
             android:textAlignment="center"
             android:textSize="15sp">
 
         </TextView>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="419dp"
+        android:layout_height="34dp"
+        android:gravity='center'
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="177dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Nome"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="225dp">
+
+        </TextView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="269dp">
+
+        <TextView
+            android:layout_width="89dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Endereço"
+            android:textColor="#8492A6"
+            android:textSize="15sp"
+            tools:layout_editor_absoluteX="27dp"
+            tools:layout_editor_absoluteY="260dp">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/input_endereco"
+            android:layout_width="300dp"
+            android:layout_height="59dp"
+            android:inputType="text" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="-9dp"
+        tools:layout_editor_absoluteY="319dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="203dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Número de telemóvel"
+            android:textColor="#8492A6"
+            android:textSize="15sp"
+            tools:layout_editor_absoluteX="27dp"
+            tools:layout_editor_absoluteY="260dp">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/editTextId"
+            android:layout_width="300dp"
+            android:layout_height="59dp"
+            android:digits="0123456789+"
+            android:inputType="phone" />
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="-9dp"
+        tools:layout_editor_absoluteY="369dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Método de pagamento"
+            android:textColor="#8492A6"
+            android:textSize="15sp"
+            tools:layout_editor_absoluteX="27dp"
+            tools:layout_editor_absoluteY="260dp">
+
+        </TextView>
+
+    </RelativeLayout>
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="300dp"
+        android:layout_height="27dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="396dp" />
+    <resources tools:ignore="MissingConstraints">
+        <string-array android:name="items_spinner">
+            <item>Escolha um método de pagamento</item>
+            <item>MBWay</item>
+            <item>PayPal</item>
+            <item>Cartão de crédito</item>
+        </string-array>
+    </resources>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintTop_toBottomOf="@id/productDetailsLayout2"
+        tools:ignore="NotSibling"
+        tools:layout_editor_absoluteX="-9dp"
+        tools:layout_editor_absoluteY="620dp">
+
+        <Button
+            android:id="@+id/productDetailsBuyNowBtn"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/colorPrimary"
+            android:fontFamily="@font/lato"
+            android:text="Terminar Sessão"
+            android:textSize="13sp"
+            android:onClick="terminarSessao"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:src="@drawable/ico_help" />
+
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
