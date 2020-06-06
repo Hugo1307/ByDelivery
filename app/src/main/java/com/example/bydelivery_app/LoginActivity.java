@@ -24,6 +24,8 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    public String getClientEmail(){return clientEmail;}
+
     public void efetuarLogin(View v){
 
         Intent intent = new Intent(this, MainActivity.class);
