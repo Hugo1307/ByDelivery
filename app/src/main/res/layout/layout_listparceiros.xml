@@ -26,12 +26,14 @@
 
     <TextView
         android:id="@+id/parceirosMOTD"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/parceirosName"
         android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="60dp"
         android:textSize="14sp"
+        android:textAlignment="center"
         android:fontFamily="@font/lato"
         android:text="'Qualidade ao seu dispor'"/>
 

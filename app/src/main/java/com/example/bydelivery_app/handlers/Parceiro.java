@@ -33,11 +33,7 @@ public class Parceiro {
 
         Date currentDate = Calendar.getInstance().getTime();
 
-        if (currentDate.after(partnerOpenSchedule) && currentDate.before(partnerCloseSchedule)) {
-            return true;
-        }else{
-            return false;
-        }
+        return currentDate.after(partnerOpenSchedule) && currentDate.before(partnerCloseSchedule);
     }
 
     public int getPartnerId() {

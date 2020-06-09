@@ -18,7 +18,6 @@ import com.example.bydelivery_app.fragments.OrdersFragment;
 import com.example.bydelivery_app.fragments.ParceirosFragment;
 import com.example.bydelivery_app.fragments.ProfileFragment;
 import com.example.bydelivery_app.handlers.FragmentChangeListener;
-import com.example.bydelivery_app.handlers.OrdinaryMethods;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends FragmentActivity implements FragmentChangeListener {
@@ -40,8 +39,6 @@ public class MainActivity extends FragmentActivity implements FragmentChangeList
                     new HomeFragment()).commit();
             bottomNav.setSelectedItemId(R.id.nav_home);
         }
-
-        OrdinaryMethods.addParceiro(R.drawable.burgerclassic_logo, "Burger Classic", "Um serviço de qualidade" ,2.1);
 
     }
 
