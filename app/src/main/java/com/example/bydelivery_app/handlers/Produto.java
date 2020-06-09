@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class Produto {
 
+    private static int id = 0;
+    private int productId;
     private String productName;
     private String productDescription;
     private String productSeller;
@@ -17,6 +19,8 @@ public class Produto {
     public Produto(String productName, String productSeller, String productDescription, int productImage, int productQuantity,
                    double productPrice, double productRating, int productWeight, int productSize){
 
+        Produto.id++;
+        this.productId = Produto.id;
         this.productName = productName;
         this.productSeller = productSeller;
         this.productDescription = productDescription;
@@ -26,78 +30,46 @@ public class Produto {
         this.productRating = productRating;
         this.productWeight = productWeight;
         this.productSize = productSize;
+    }
+
+    public int getProductId(){
+        return productId;
     }
 
     public String getProductName() {
         return productName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
     public String getProductSeller() {
         return productSeller;
-    }
-
-    public void setProductSeller(String productSeller) {
-        this.productSeller = productSeller;
     }
 
     public int getProductImage() {
         return productImage;
     }
 
-    public void setProductImage(int productImage) {
-        this.productImage = productImage;
-    }
-
     public int getProductQuantity() {
         return productQuantity;
-    }
-
-    public void setProductQuantity(int productQuantity) {
-        this.productQuantity = productQuantity;
     }
 
     public double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(double productPrice) {
-        this.productPrice = productPrice;
-    }
-
     public int getProductWeight() {
         return productWeight;
-    }
-
-    public void setProductWeight(int productWeight) {
-        this.productWeight = productWeight;
     }
 
     public int getProductSize() {
         return productSize;
     }
 
-    public void setProductSize(int productSize) {
-        this.productSize = productSize;
-    }
-
     public String getProductDescription() {
         return productDescription;
     }
 
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
-    }
-
     public double getProductRating() {
         return productRating;
-    }
-
-    public void setProductRating(double productRating) {
-        this.productRating = productRating;
     }
 
     public void add(int q){

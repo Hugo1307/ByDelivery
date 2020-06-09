@@ -84,13 +84,19 @@ public class MainActivity extends FragmentActivity implements FragmentChangeList
 
     @Override
     public void replaceFragment(Fragment fragment) {
-        currentFragment = fragment;
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        if (currentFragment != null) {
+            if (currentFragment.getClass() != fragment.getClass()) {
+                fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            }
+        }
         fragmentTransaction.replace(R.id.fragment_container, fragment, fragment.toString());
         fragmentTransaction.addToBackStack(fragment.toString());
         fragmentTransaction.commit();
+
+        currentFragment = fragment;
     }
 
 }

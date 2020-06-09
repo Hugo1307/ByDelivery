@@ -25,7 +25,7 @@ public class ProductsFragment extends Fragment {
     private static final String TAG = "ProductsFragment";
 
     private static View rootView;
-    private List<Produto> productsList = ProductsList.getComida();
+    private List<Produto> productsList = ProductsList.getAllProducts();
 
     @Nullable
     @Override
