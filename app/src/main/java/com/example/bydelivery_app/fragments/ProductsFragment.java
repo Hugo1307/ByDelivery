@@ -36,7 +36,6 @@ public class ProductsFragment extends Fragment {
         initRecyclerView();
 
         return view;
-
     }
 
     private void initRecyclerView(){
