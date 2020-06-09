@@ -1,24 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#FFFFFF">
 
-    <ImageView
-        android:id="@+id/productCategoryBanner"
+    <RelativeLayout
+        android:id="@+id/productsListLayout1"
         android:layout_width="match_parent"
-        android:layout_height="232dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/food_banner"/>
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.28"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@drawable/food_banner">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@id/productCategoryBanner"
-        android:id="@+id/recycler_view"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/waves"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:id="@+id/productsListCategoryLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/chewy"
+            android:textSize="50sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="60dp"
+            android:shadowColor="#646464"
+            android:shadowDx="-5"
+            android:shadowDy="-5"
+            android:shadowRadius="5"
+            android:text="[Teste]"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="20dp"
-        android:padding="@dimen/offset"/>
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent=".72"
+        app:layout_constraintTop_toBottomOf="@id/productsListLayout1">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/productsListRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="20dp"
+            android:padding="@dimen/offset"/>
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

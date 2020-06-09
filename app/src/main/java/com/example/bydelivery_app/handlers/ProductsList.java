@@ -28,8 +28,8 @@ public abstract class ProductsList {
     private static String vaselineDescription = "- Reduz o aparecimento de linhas finas e secas.\n- Ajuda a proteger cortes menores.\n- Comedogénico e hipoalergénico.";
 
     private static List<Comida> comida = new ArrayList<>(Arrays.asList(
-            new Comida("Frango Churrasco", "Restaurante O Churrasco", frangoDescription, R.drawable.frango_banner, 1, 5.60, 3.7, 800, 250),
-            new Comida("Bifana", "Restaurante do Sol", bifanaDescription, R.drawable.binafa_banner, 1, 7.50, 4.8, 190, 200),
+            new Comida("Frango Churrasco", "O Churrasco", frangoDescription, R.drawable.frango_banner, 1, 5.60, 3.7, 800, 250),
+            new Comida("Bifana", "Restaurante Sol", bifanaDescription, R.drawable.binafa_banner, 1, 7.50, 4.8, 190, 200),
             new Comida("Pizza", "Itzza Pitzza", pizzaDescription, R.drawable.pizza_banner, 1, 7.50, 4.3, 150, 200),
             new Comida("Hambúrguer", "Burguer Classic", hamburguerDescription, R.drawable.hamburguer_banner, 1, 4.99, 4.2, 250, 100),
             new Comida("Sushi", "Sushi Sentido", sushiDescription, R.drawable.sushi_banner, 1, 9.49, 5.0, 300, 250),
@@ -37,32 +37,32 @@ public abstract class ProductsList {
 
     private static List<Roupa> roupa = new ArrayList<>(Arrays.asList(
             new Roupa("Casaco", "Santo Cabide", casacoDescription, R.drawable.casaco_banner, 1, 15.99, 3.0, 1200,"L"),
-            new Roupa("Sapatos", "Pés de Seda", sapatosDescription, R.drawable.sapatos_banner,1, 49.99, 4.3,1500, 44),
+            new Roupa("Sapatos", "Pés de Seda", sapatosDescription, R.drawable.sapatos_banner,1, 49.99, 4.3,1500, "44"),
             new Roupa("T-Shirt", "Santo Cabide", tshirtDescription, R.drawable.tshirt_banner, 1, 12.99, 3.7, 1000,"M"),
-            new Roupa("Calças", "Santo Cabide", calcasDescription, R.drawable.calcas_banner, 1, 24.99, 4.5, 1000,38),
-            new Roupa("Sandálias", "Pé de Seda", sandaliasDescription, R.drawable.sandalias_banner,1, 34.99, 4.6,1000, 40),
+            new Roupa("Calças", "Santo Cabide", calcasDescription, R.drawable.calcas_banner, 1, 24.99, 4.5, 1000,"38"),
+            new Roupa("Sandálias", "Pés de Seda", sandaliasDescription, R.drawable.sandalias_banner,1, 34.99, 4.6,1000, "40"),
             new Roupa("Vestido", "Santo Cabide", vestidoDescription, R.drawable.vestido_banner, 1, 29.99, 4.1, 900,"S")
     ));
 
     private static List<Farmacia> farmacia = new ArrayList<>(Arrays.asList(
-            new Farmacia("Creme hidratante 'Nivea'", "Farmácia Santana", niveaDescription, R.drawable.nivea_banner, 1, 10.00, 5.0, 850, 100),
-            new Farmacia("Protetor Solar 'La Roche-Posay'", "Farmácia Santana", protetorsolarDescription, R.drawable.protetorsolar_banner, 1, 14.49, 4.3, 850, 100),
-            new Farmacia("Repelente para Insetos 'Repel Bite'", "Farmácia Santana", repelenteDescription, R.drawable.repelente_banner, 1, 17.49, 3.6, 450, 100),
+            new Farmacia("Creme hidratante", "Farmácia Santana", niveaDescription, R.drawable.nivea_banner, 1, 10.00, 5.0, 850, 100),
+            new Farmacia("Protetor Solar", "Farmácia Santana", protetorsolarDescription, R.drawable.protetorsolar_banner, 1, 14.49, 4.3, 850, 100),
+            new Farmacia("Repelente para Insetos", "Farmácia Santana", repelenteDescription, R.drawable.repelente_banner, 1, 17.49, 3.6, 450, 100),
             new Farmacia("Meias Térmicas", "Farmácia Santana", meiasDescription, R.drawable.meias_banner, 1, 19.99, 3.6, 150, 200),
-            new Farmacia("Preservativos 'Durex'", "Farmácia Santana", preservativosDescription, R.drawable.preservativos_banner, 1, 7.00, 4.9, 100, 200),
+            new Farmacia("Preservativos", "Farmácia Santana", preservativosDescription, R.drawable.preservativos_banner, 1, 7.00, 4.9, 100, 200),
             new Farmacia("Vaseline Original", "Farmácia Santana", vaselineDescription, R.drawable.vaseline_banner, 1, 8.00, 4.2, 350, 250)
             ));
 
-    public static List<Comida> getComida() {
-        return comida;
+    public static List<Produto> getComida() {
+        return new ArrayList<Produto>(comida);
     }
 
-    public static List<Roupa> getRoupa() {
-        return roupa;
+    public static List<Produto> getRoupa() {
+        return new ArrayList<Produto>(roupa);
     }
 
-    public static List<Farmacia> getFarmacia() {
-        return farmacia;
+    public static List<Produto> getFarmacia() {
+        return new ArrayList<Produto>(farmacia);
     }
 
     public static List<Produto> getAllProducts(){

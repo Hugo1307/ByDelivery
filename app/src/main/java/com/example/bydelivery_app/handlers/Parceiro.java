@@ -71,4 +71,8 @@ public class Parceiro {
     public Date getPartnerCloseSchedule() {
         return partnerCloseSchedule;
     }
+
+    public void setPartnerRating(Double partnerRating) {
+        this.partnerRating = partnerRating;
+    }
 }

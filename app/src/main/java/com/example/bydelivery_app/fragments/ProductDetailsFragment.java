@@ -8,11 +8,14 @@ import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.bydelivery_app.R;
 import com.example.bydelivery_app.handlers.Carrinho;
+import com.example.bydelivery_app.handlers.Encomenda;
+import com.example.bydelivery_app.handlers.EncomendasList;
 import com.example.bydelivery_app.handlers.OrdinaryMethods;
 import com.example.bydelivery_app.handlers.Produto;
 
@@ -41,7 +44,7 @@ public class ProductDetailsFragment extends Fragment {
         TextView labelProductDescription = view.findViewById(R.id.productDetailsDescription);
         TextView labelProductWeight = view.findViewById(R.id.productDetailsLabelPeso);
         TextView labelProductSize = view.findViewById(R.id.productDetailsLabelTamanho);
-        RatingBar productRatingBar = view.findViewById(R.id.productDetailsRatingBar);
+        final RatingBar productRatingBar = view.findViewById(R.id.productDetailsRatingBar);
         final Date currentTime = Calendar.getInstance().getTime();
 
         rootView = view;
@@ -53,6 +56,24 @@ public class ProductDetailsFragment extends Fragment {
         labelProductWeight.setText(String.valueOf(product.getProductWeight()) + " g");
         labelProductSize.setText(String.valueOf(product.getProductSize()));
         productRatingBar.setRating((float)product.getProductRating());
+
+        productRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+
+                boolean canEvaluate = false;
+                for (Encomenda e : EncomendasList.getListaEncomendas()) {
+                    if (e.getProductsList().contains(product))
+                        canEvaluate = true;
+                }
+
+                if (!canEvaluate && fromUser) {
+                    Toast.makeText(getContext(), "Só poderá avaliar depois de comprar", Toast.LENGTH_SHORT).show();
+                    productRatingBar.setRating((float)product.getProductRating());
+                }
+
+            }
+        });
 
         view.findViewById(R.id.productDetailsBuyNowBtn).setOnClickListener(new View.OnClickListener() {
             @Override

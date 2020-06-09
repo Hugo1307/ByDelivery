@@ -159,6 +159,7 @@
             android:text="Aberto"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/parceiroDetailsCheckProductsBtn"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_alignParentEnd="true"

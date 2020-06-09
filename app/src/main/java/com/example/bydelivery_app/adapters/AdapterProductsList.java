@@ -13,10 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bydelivery_app.R;
 import com.example.bydelivery_app.fragments.ProductsFragment;
-import com.example.bydelivery_app.handlers.ProductsList;
 import com.example.bydelivery_app.handlers.Produto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterProductsList extends RecyclerView.Adapter<AdapterProductsList.ViewHolder>{
@@ -24,12 +22,9 @@ public class AdapterProductsList extends RecyclerView.Adapter<AdapterProductsLis
     private static final String TAG = "AdapterProductsList";
 
     private List<Produto> productsList;
-    private ArrayList<Integer> productImages;
-    private ArrayList<String> productSellers;
-    private ArrayList<Double> productPrices;
 
     public AdapterProductsList(List<Produto> productsList) {
-        this.productsList = ProductsList.getAllProducts();
+        this.productsList = productsList;
     }
 
     @NonNull
@@ -51,6 +46,22 @@ public class AdapterProductsList extends RecyclerView.Adapter<AdapterProductsLis
         holder.productName.setText(productsList.get(position).getProductName());
         holder.partnerName.setText(productsList.get(position).getProductSeller());
         holder.productPrice.setText(String.valueOf(productsList.get(position).getProductPrice()) + "€");
+
+        if (holder.productName.getText().length() >= 16) {
+            ViewGroup.MarginLayoutParams productNameMargins = (ViewGroup.MarginLayoutParams) holder.productName.getLayoutParams();
+            productNameMargins.topMargin = 25;
+            holder.productName.setTextSize(14);
+        }
+
+        if (holder.productName.getText().length() >= 18) {
+            ViewGroup.MarginLayoutParams productNameMargins = (ViewGroup.MarginLayoutParams) holder.productName.getLayoutParams();
+            productNameMargins.topMargin = 30;
+            holder.productName.setTextSize(11);
+        }
+
+        if (holder.partnerName.getText().length() >= 18) {
+            holder.productName.setTextSize(11);
+        }
 
         holder.productLayout.setOnClickListener(new View.OnClickListener(){
             @Override

@@ -9,12 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.bydelivery_app.R;
 import com.example.bydelivery_app.handlers.FragmentChangeListener;
+import com.example.bydelivery_app.handlers.Pesquisa;
 import com.example.bydelivery_app.handlers.ProductsList;
 
 public class HomeFragment extends Fragment {
@@ -27,7 +29,14 @@ public class HomeFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        RelativeLayout categoryLayout1 = view.findViewById(R.id.category1);
+        RelativeLayout comidaLayout = view.findViewById(R.id.category1);
+        RelativeLayout roupaLayout = view.findViewById(R.id.category2);
+        RelativeLayout farmaciaLayout = view.findViewById(R.id.category3);
+        RelativeLayout tecnologiaLayout = view.findViewById(R.id.category4);
+        RelativeLayout papelariaLayout = view.findViewById(R.id.category5);
+        RelativeLayout eletronicosLayout = view.findViewById(R.id.category6);
+        RelativeLayout exercicio = view.findViewById(R.id.category7);
+        RelativeLayout outrosLayout = view.findViewById(R.id.category8);
         final AutoCompleteTextView searchBar = view.findViewById(R.id.homeSearchBar);
         ImageView searchButton = view.findViewById(R.id.homeSearchButton);
 
@@ -37,14 +46,40 @@ public class HomeFragment extends Fragment {
 
         searchBar.setAdapter(adapter);
 
-        categoryLayout1.setOnClickListener(new View.OnClickListener() {
+        comidaLayout.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
                 Log.d(TAG, "onClick: clicked");
 
-                Fragment fr = new ProductsFragment();
+                Fragment fr = new ProductsFragment(ProductsList.getComida(), "Comida", R.drawable.food_banner);
+                FragmentChangeListener fc = (FragmentChangeListener) getActivity();
+                fc.replaceFragment(fr);
+            }
+        });
+
+        roupaLayout.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Log.d(TAG, "onClick: clicked");
+
+                Fragment fr = new ProductsFragment(ProductsList.getRoupa(), "Roupa", R.drawable.clothes_banner);
+                FragmentChangeListener fc = (FragmentChangeListener) getActivity();
+                fc.replaceFragment(fr);
+            }
+        });
+
+        farmaciaLayout.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Log.d(TAG, "onClick: clicked");
+
+                Fragment fr = new ProductsFragment(ProductsList.getFarmacia(), "Farmácia", R.drawable.azul);
                 FragmentChangeListener fc = (FragmentChangeListener) getActivity();
                 fc.replaceFragment(fr);
             }
@@ -53,9 +88,14 @@ public class HomeFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fr = new SearchFragment(searchBar.getText().toString());
-                FragmentChangeListener fc = (FragmentChangeListener) getActivity();
-                fc.replaceFragment(fr);
+                if (!searchBar.getText().toString().equals("")) {
+                    Fragment fr = new SearchFragment(Pesquisa.makeSearch(searchBar.getText().toString()));
+                    FragmentChangeListener fc = (FragmentChangeListener) getActivity();
+                    fc.replaceFragment(fr);
+                }else{
+                    Toast.makeText(getContext(), "Insira uma palavra-chave primeiro", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 

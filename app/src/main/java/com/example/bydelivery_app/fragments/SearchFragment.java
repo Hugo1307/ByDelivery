@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bydelivery_app.R;
 import com.example.bydelivery_app.adapters.AdapterSearchList;
+import com.example.bydelivery_app.handlers.FragmentChangeListener;
 import com.example.bydelivery_app.handlers.Pesquisa;
 import com.example.bydelivery_app.handlers.ProductsList;
 import com.example.bydelivery_app.handlers.Produto;
@@ -27,11 +28,11 @@ import java.util.List;
 public class SearchFragment extends Fragment {
 
     private static final String TAG = "SearchFragment";
-    private View rootView;
+    private static View rootView;
     private List<Produto> searchResults;
 
-    public SearchFragment(String palavraChave){
-        searchResults = Pesquisa.makeSearch(palavraChave);
+    public SearchFragment(List<Produto> searchResults){
+        this.searchResults = searchResults;
     }
 
     @Nullable
@@ -50,9 +51,13 @@ public class SearchFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchResults = Pesquisa.makeSearch(searchBar.getText().toString());
-                summaryResults.setText(searchResults.size() + " resultado(s) encontrado(s)");
-                initRecyclerView();
+
+                if (!searchBar.getText().toString().equals("")) {
+                    searchResults = Pesquisa.makeSearch(searchBar.getText().toString());
+                    summaryResults.setText(searchResults.size() + " resultado(s) encontrado(s)");
+                    initRecyclerView();
+                }
+
             }
         });
 
@@ -69,6 +74,12 @@ public class SearchFragment extends Fragment {
         AdapterSearchList adapter = new AdapterSearchList(searchResults);
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    public static void showProduct(Produto p){
+        Fragment fr = new ProductDetailsFragment(p);
+        FragmentChangeListener fc = (FragmentChangeListener) rootView.getContext();
+        fc.replaceFragment(fr);
     }
 
 }

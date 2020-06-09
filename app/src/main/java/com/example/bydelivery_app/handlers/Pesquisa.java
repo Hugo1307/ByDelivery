@@ -10,12 +10,27 @@ public abstract class Pesquisa {
         List<Produto> searchResults = new ArrayList<>();
 
         for (Produto p : ProductsList.getAllProducts()) {
-            if (p.getProductName().equalsIgnoreCase(palavra) || p.getProductName().contains(palavra))
-                    searchResults.add(p);
+            if (p.getProductName().toLowerCase().equals(palavra.toLowerCase()) ||
+                    p.getProductName().toLowerCase().contains(palavra.toLowerCase())) {
+
+                searchResults.add(p);
+            }
         }
 
         return searchResults;
 
+    }
+
+    public static List<Produto> getProductsBySeller(String sellerName){
+
+        List<Produto> returnList = new ArrayList<>();
+
+        for (Produto p : ProductsList.getAllProducts()) {
+            if (p.getProductSeller().equalsIgnoreCase(sellerName))
+                returnList.add(p);
+        }
+
+        return returnList;
     }
 
 }

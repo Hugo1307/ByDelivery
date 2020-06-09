@@ -4,12 +4,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bydelivery_app.R;
+import com.example.bydelivery_app.fragments.SearchFragment;
 import com.example.bydelivery_app.handlers.Produto;
 
 import java.util.List;
@@ -35,7 +37,7 @@ public class AdapterSearchList extends RecyclerView.Adapter<AdapterSearchList.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterSearchList.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterSearchList.ViewHolder holder, final int position) {
 
         holder.searchProductImage.setImageResource(searchResults.get(position).getProductImage());
         holder.searchProductImage.setClipToOutline(true);
@@ -43,6 +45,14 @@ public class AdapterSearchList extends RecyclerView.Adapter<AdapterSearchList.Vi
         holder.searchProductName.setText(searchResults.get(position).getProductName());
         holder.searchProductPrice.setText(String.valueOf(searchResults.get(position).getProductPrice()) + "€");
         holder.searchProductSeller.setText(searchResults.get(position).getProductSeller());
+
+        holder.searchMainItemLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchFragment.showProduct(searchResults.get(position));
+            }
+        });
+
 
     }
 
@@ -53,6 +63,7 @@ public class AdapterSearchList extends RecyclerView.Adapter<AdapterSearchList.Vi
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
+        RelativeLayout searchMainItemLayout;
         TextView searchProductName;
         TextView searchProductSeller;
         TextView searchProductPrice;
@@ -61,6 +72,7 @@ public class AdapterSearchList extends RecyclerView.Adapter<AdapterSearchList.Vi
         ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            searchMainItemLayout = itemView.findViewById(R.id.searchItemMainLayout);
             searchProductName = itemView.findViewById(R.id.searchProductName);
             searchProductSeller = itemView.findViewById(R.id.searchProductSeller);
             searchProductPrice = itemView.findViewById(R.id.searchProductPrice);
