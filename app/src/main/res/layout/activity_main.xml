@@ -22,25 +22,25 @@
 
         </ImageView>
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="15dp"
-            android:background="@drawable/user_icon"
+            android:src="@drawable/fotodeperfil"
             android:onClick="abrirPerfil">
 
-        </ImageView>
+        </de.hdodenhof.circleimageview.CircleImageView>
 
-        <ImageView
+
+        <!--<ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="25dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/search_icon">
+            android:background="@drawable/search_icon"/>-->
 
-        </ImageView>
 
     </RelativeLayout>
 

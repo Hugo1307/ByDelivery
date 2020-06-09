@@ -5,13 +5,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.bydelivery_app.MainActivity;
 import com.example.bydelivery_app.R;
+import com.example.bydelivery_app.handlers.Carrinho;
+import com.example.bydelivery_app.handlers.OrdinaryMethods;
+import com.example.bydelivery_app.handlers.Produto;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -21,25 +24,10 @@ public class ProductDetailsFragment extends Fragment {
     private static final String TAG = "ProductDetailsFragment";
     private View rootView;
     
-    private String productName;
-    private String productSeller;
-    private int productImage;
-    private double productPrice;
+    private Produto product;
 
-    public ProductDetailsFragment () {
-
-        this.productName = "[ProductName]";
-        this.productSeller = "[ProductSeller]";
-        this.productImage = R.drawable.azul_login_waved;
-        this.productPrice = 0;
-
-    }
-
-    public void applyChanges(String productName, String productSeller, int productImage, double productPrice){
-        this.productName = productName;
-        this.productSeller = productSeller;
-        this.productImage = productImage;
-        this.productPrice = productPrice;
+    public ProductDetailsFragment (Produto p) {
+        this.product = p;
     }
 
     @Override
@@ -47,13 +35,24 @@ public class ProductDetailsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_productdetails, null);
 
-        ImageView imageProductImg = view.findViewById(R.id.productDetailsBannerImg);
-        TextView labelproductSeller = view.findViewById(R.id.productDetailsSeller);
+        RelativeLayout imageProductImg = view.findViewById(R.id.productDetailsBanner);
+        TextView labelProductName = view.findViewById(R.id.productDetailsNameLabel);
+        TextView labelProductSeller = view.findViewById(R.id.productDetailsSeller);
+        TextView labelProductDescription = view.findViewById(R.id.productDetailsDescription);
+        TextView labelProductWeight = view.findViewById(R.id.productDetailsLabelPeso);
+        TextView labelProductSize = view.findViewById(R.id.productDetailsLabelTamanho);
+        RatingBar productRatingBar = view.findViewById(R.id.productDetailsRatingBar);
         final Date currentTime = Calendar.getInstance().getTime();
 
         rootView = view;
-        imageProductImg.setImageResource(productImage);
-        labelproductSeller.setText(productSeller);
+
+        imageProductImg.setBackgroundResource(product.getProductImage());
+        labelProductName.setText(product.getProductName());
+        labelProductSeller.setText(product.getProductSeller());
+        labelProductDescription.setText(product.getProductDescription());
+        labelProductWeight.setText(String.valueOf(product.getProductWeight()) + " g");
+        labelProductSize.setText(String.valueOf(product.getProductSize()));
+        productRatingBar.setRating((float)product.getProductRating());
 
         view.findViewById(R.id.productDetailsBuyNowBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,11 +60,12 @@ public class ProductDetailsFragment extends Fragment {
 
                 Log.d(TAG, "onClick: button clicked");
 
-                ((MainActivity) getActivity()).getCartFragment().addProduct(productName, productSeller, productImage, productPrice,
-                        1);
+                Carrinho.addProduct(product);
 
-                MainActivity.addNotification(productImage, productName,
-                        "Novo produto adicionado ao carrinho", currentTime.getHours() + ":" + String.format("%02d", currentTime.getMinutes()));
+                OrdinaryMethods.addNotification(product.getProductImage(), product.getProductName(),
+                        "Novo produto adicionado ao carrinho",
+                        currentTime.getHours() + ":" + String.format("%02d", currentTime.getMinutes()));
+
             }
         });
 

@@ -1,4 +1,4 @@
-package com.example.bydelivery_app;
+package com.example.bydelivery_app.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bydelivery_app.R;
 import com.example.bydelivery_app.handlers.RecyclerValuesStorage;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class AdapterNotificationsList extends RecyclerView.Adapter<AdapterNotifi
     public AdapterNotificationsList.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listnotifications, parent, false);
         AdapterNotificationsList.ViewHolder holder = new AdapterNotificationsList.ViewHolder(view);
+
         return holder;
     }
 

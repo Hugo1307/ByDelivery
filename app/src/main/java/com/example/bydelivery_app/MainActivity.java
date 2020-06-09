@@ -1,6 +1,5 @@
 package com.example.bydelivery_app;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -15,19 +14,18 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.bydelivery_app.fragments.CartFragment;
 import com.example.bydelivery_app.fragments.HomeFragment;
 import com.example.bydelivery_app.fragments.NotificationsFragment;
-import com.example.bydelivery_app.fragments.ProductsFragment;
+import com.example.bydelivery_app.fragments.OrdersFragment;
+import com.example.bydelivery_app.fragments.ParceirosFragment;
 import com.example.bydelivery_app.fragments.ProfileFragment;
 import com.example.bydelivery_app.handlers.FragmentChangeListener;
-import com.example.bydelivery_app.handlers.RecyclerValuesStorage;
+import com.example.bydelivery_app.handlers.OrdinaryMethods;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends FragmentActivity implements FragmentChangeListener {
 
     private static final String TAG = "MainActivity";
 
-    private Fragment currentFragment;
-    private CartFragment cartFragment = new CartFragment();
-    private ProductsFragment productsFragment = new ProductsFragment();
+    private static Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +41,13 @@ public class MainActivity extends FragmentActivity implements FragmentChangeList
             bottomNav.setSelectedItemId(R.id.nav_home);
         }
 
+        OrdinaryMethods.addParceiro(R.drawable.burgerclassic_logo, "Burger Classic", "Um serviço de qualidade" ,2.1);
+
     }
 
     public void abrirPerfil(View v){
 
-        Intent intent = new Intent(getApplicationContext(), ProfileFragment.class);
-        startActivity(intent);
+        replaceFragment(new ProfileFragment());
 
     }
 
@@ -62,56 +61,36 @@ public class MainActivity extends FragmentActivity implements FragmentChangeList
                         selectedFragment = new HomeFragment();
                         break;
                     case R.id.nav_shop_cart:
-                        selectedFragment = cartFragment;
+                        selectedFragment = new CartFragment();
                         break;
                     case R.id.nav_notifications:
                         selectedFragment = new NotificationsFragment();
                         break;
+                    case R.id.nav_orders:
+                        selectedFragment = new OrdersFragment();
+                        break;
+                    case R.id.nav_partners:
+                        selectedFragment = new ParceirosFragment();
+                        break;
                     default:
+                        selectedFragment = new HomeFragment();
                         Log.d(TAG, "onNavigationItemSelected: unknown Fragment");
                         break;
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        selectedFragment).commit();
+                replaceFragment(selectedFragment);
                 return true;
             }
         };
 
     @Override
     public void replaceFragment(Fragment fragment) {
+        currentFragment = fragment;
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         fragmentTransaction.replace(R.id.fragment_container, fragment, fragment.toString());
         fragmentTransaction.addToBackStack(fragment.toString());
         fragmentTransaction.commit();
     }
-
-    public static void addNotification(int image, String title, String body, String notificationTime) {
-
-        RecyclerValuesStorage.getNotificationsImages().add(image);
-        RecyclerValuesStorage.getNotificationsTitles().add(title);
-        RecyclerValuesStorage.getNotificationsBodyStrings().add(body);
-        RecyclerValuesStorage.getNotificationsHours().add(notificationTime);
-
-        Log.d(TAG, "addNotification: added new notification");
-
-    }
-
-    public static void cleanNotifications(int image, String title, String body, String notificationTime) {
-
-        RecyclerValuesStorage.getNotificationsImages().clear();
-        RecyclerValuesStorage.getNotificationsTitles().clear();
-        RecyclerValuesStorage.getNotificationsBodyStrings().clear();
-        RecyclerValuesStorage.getNotificationsHours().clear();
-
-    }
-
-    /////////////////////////////////////////////////////////
-    //                GETTERS E SETTERS                    //
-    /////////////////////////////////////////////////////////
-
-    public CartFragment getCartFragment(){ return this.cartFragment; }
-
-    public ProductsFragment getProductsFragment() { return productsFragment; }
 
 }

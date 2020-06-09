@@ -1,6 +1,5 @@
-package com.example.bydelivery_app;
+package com.example.bydelivery_app.adapters;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,27 +11,25 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bydelivery_app.R;
 import com.example.bydelivery_app.fragments.ProductsFragment;
+import com.example.bydelivery_app.handlers.ProductsList;
+import com.example.bydelivery_app.handlers.Produto;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AdapterProductsList extends RecyclerView.Adapter<AdapterProductsList.ViewHolder>{
 
-    private static final String TAG = "AdapterCartList";
+    private static final String TAG = "AdapterProductsList";
 
-    private ArrayList<String> productNames;
+    private List<Produto> productsList;
     private ArrayList<Integer> productImages;
     private ArrayList<String> productSellers;
     private ArrayList<Double> productPrices;
-    private Context mContext;
 
-    public AdapterProductsList(Context mContext, ArrayList<String> productNames, ArrayList<String> productSellers,
-                        ArrayList<Double> productPrices, ArrayList<Integer> productImages) {
-        this.productNames = productNames;
-        this.productSellers = productSellers;
-        this.productImages = productImages;
-        this.productPrices = productPrices;
-        this.mContext = mContext;
+    public AdapterProductsList(List<Produto> productsList) {
+        this.productsList = ProductsList.getAllProducts();
     }
 
     @NonNull
@@ -48,30 +45,29 @@ public class AdapterProductsList extends RecyclerView.Adapter<AdapterProductsLis
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
-        holder.productImage.setImageResource(productImages.get(position));
+        holder.productImage.setImageResource(productsList.get(position).getProductImage());
         holder.productImage.setClipToOutline(true);
         holder.productImage.bringToFront();
-        holder.productName.setText(productNames.get(position));
-        holder.partnerName.setText(productSellers.get(position));
-        holder.productPrice.setText(String.valueOf(productPrices.get(position)) + "€");
+        holder.productName.setText(productsList.get(position).getProductName());
+        holder.partnerName.setText(productsList.get(position).getProductSeller());
+        holder.productPrice.setText(String.valueOf(productsList.get(position).getProductPrice()) + "€");
 
         holder.productLayout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
 
-                Log.d(TAG, "onClick: clicked on: " + productNames.get(position));
+                Log.d(TAG, "onClick: clicked on: " + productsList.get(position).getProductName());
 
-                ProductsFragment.openProduct(productNames.get(position), productSellers.get(position), productImages.get(position),
-                        productPrices.get(position));
-
+                ProductsFragment.openProduct(productsList.get(position));
             }
         });
 
     }
 
+
     @Override
     public int getItemCount() {
-        return productNames.size();
+        return productsList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

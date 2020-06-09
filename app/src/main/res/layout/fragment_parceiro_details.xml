@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFFFFF">
+
+    <RelativeLayout
+        android:id="@+id/parceiroDetailsLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.30"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@drawable/banner_parceiro_background">
+
+        <ImageView
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/burgerclassic_logo"/>
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/parceiroDetailsLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.70"
+        app:layout_constraintTop_toBottomOf="@id/parceiroDetailsLayout1">
+
+        <TextView
+            android:id="@+id/parceiroDetailsName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="28sp"
+            android:fontFamily="@font/lato_bold"
+            android:text="Burguer Classic"/>
+
+        <TextView
+            android:id="@+id/parceiroDetailsRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/parceiroDetailsName"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="24sp"
+            android:fontFamily="@font/lato"
+            android:textColor="#FFAB40"
+            android:text="4.5★"/>
+
+        <TextView
+            android:id="@+id/parceiroDetailsMot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/parceiroDetailsRating"
+            android:fontFamily="@font/lato"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            android:textColor="#A0A0A0"
+            android:textAlignment="center"
+            android:text="Hamburgueria clássica com os melhores sabores desde 1965"/>
+
+        <TextView
+            android:id="@+id/parceiroDetailsLabel1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="40dp"
+            android:layout_below="@id/parceiroDetailsMot"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:text="Localização"/>
+
+        <TextView
+            android:id="@+id/parceiroDetailsLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/parceiroDetailsLabel1"
+            android:fontFamily="@font/lato"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:text="Rua do Repolho"/>
+
+        <TextView
+            android:id="@+id/parceiroDetailsLabel2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/parceiroDetailsLocation"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:text="Contacto"/>
+
+        <TextView
+            android:id="@+id/parceiroDetailsContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/parceiroDetailsLabel2"
+            android:fontFamily="@font/lato"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:text="910 000 000"/>
+
+        <TextView
+            android:id="@+id/parceiroDetailsLabel3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/parceiroDetailsContact"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:text="Horário"/>
+
+        <TextView
+            android:id="@+id/parceiroDetailsSchedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/parceiroDetailsLabel3"
+            android:fontFamily="@font/lato"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:text="07:00-22:00"/>
+
+        <TextView
+            android:id="@+id/parceiroDetailsStoreStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/parceiroDetailsSchedule"
+            android:fontFamily="@font/lato"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:text="Aberto"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/ic_shopping_basket_black_24dp"/>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

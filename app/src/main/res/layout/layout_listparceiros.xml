@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="225dp"
+    android:id="@+id/parceirosRecyclerMainLayout">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/parceirosImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/azul"/>
+
+    <TextView
+        android:id="@+id/parceirosName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/parceirosImage"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="22sp"
+        android:fontFamily="@font/lato_bold"
+        android:text="Burguer Classic"/>
+
+    <TextView
+        android:id="@+id/parceirosMOTD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/parceirosName"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="14sp"
+        android:fontFamily="@font/lato"
+        android:text="'Qualidade ao seu dispor'"/>
+
+    <TextView
+        android:id="@+id/parceirosRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/parceirosMOTD"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:fontFamily="@font/lato"
+        android:textColor="#FFAB40"
+        android:text="4.5★"/>
+
+</RelativeLayout>
