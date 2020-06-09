@@ -27,7 +27,7 @@ public class ProfileFragment extends Fragment {
     EditText text = (EditText) v.findViewById(R.id.editTextId);
     PhoneNumberUtils.formatNumber(text.getText().toString());
     PhoneNumberUtils.compare(String a, String b);
-
+*/
 
     Spinner spinner = (Spinner) v.findViewById(R.id.spinner);
     // Create an ArrayAdapter using the string array and a default spinner layout
@@ -36,7 +36,7 @@ public class ProfileFragment extends Fragment {
     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     // Apply the adapter to the spinner
     spinner.setAdapter(adapter);
-    */
+
 
     public void terminarSessao(View v){
 
