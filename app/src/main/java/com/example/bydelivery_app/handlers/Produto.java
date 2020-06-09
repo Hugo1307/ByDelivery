@@ -14,7 +14,7 @@ public class Produto {
     private double productPrice;
     private double productRating;
     private int productWeight;
-    private int productSize;
+    private int productSize; private String productSizeClothes;
 
     public Produto(String productName, String productSeller, String productDescription, int productImage, int productQuantity,
                    double productPrice, double productRating, int productWeight, int productSize){
@@ -30,6 +30,22 @@ public class Produto {
         this.productRating = productRating;
         this.productWeight = productWeight;
         this.productSize = productSize;
+    }
+
+    public Produto(String productName, String productSeller, String productDescription, int productImage, int productQuantity,
+                   double productPrice, double productRating, int productWeight, String productSize){
+
+        Produto.id++;
+        this.productId = Produto.id;
+        this.productName = productName;
+        this.productSeller = productSeller;
+        this.productDescription = productDescription;
+        this.productImage = productImage;
+        this.productQuantity = productQuantity;
+        this.productPrice = productPrice;
+        this.productRating = productRating;
+        this.productWeight = productWeight;
+        this.productSizeClothes = productSize;
     }
 
     public int getProductId(){
@@ -62,6 +78,10 @@ public class Produto {
 
     public int getProductSize() {
         return productSize;
+    }
+
+    public String getProductSizeClothes() {
+        return productSizeClothes;
     }
 
     public String getProductDescription() {
