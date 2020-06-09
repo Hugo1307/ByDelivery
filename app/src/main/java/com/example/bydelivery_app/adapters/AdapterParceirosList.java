@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bydelivery_app.R;
 import com.example.bydelivery_app.fragments.ParceiroDetailsFragment;
 import com.example.bydelivery_app.handlers.FragmentChangeListener;
-import com.example.bydelivery_app.handlers.RecyclerValuesStorage;
+import com.example.bydelivery_app.handlers.Parceiro;
+import com.example.bydelivery_app.handlers.PartnersList;
 
 import java.util.List;
 
@@ -22,16 +23,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AdapterParceirosList extends RecyclerView.Adapter<AdapterParceirosList.ViewHolder> {
 
     private View rootView;
-    private List<Integer> parceirosLogos;
-    private List<String> parceirosNames;
-    private List<String> parceirosMOTDs;
-    private List<Double> parceirosRatings;
+    private List<Parceiro> partnersList;
 
     public AdapterParceirosList(){
-        this.parceirosLogos = RecyclerValuesStorage.getParceirosLogos();
-        this.parceirosNames = RecyclerValuesStorage.getParceirosNames();
-        this.parceirosRatings = RecyclerValuesStorage.getParceirosRatings();
-        this.parceirosMOTDs = RecyclerValuesStorage.getParceirosMOTDs();
+        this.partnersList = PartnersList.getPartnersList();
     }
 
     @NonNull
@@ -46,17 +41,17 @@ public class AdapterParceirosList extends RecyclerView.Adapter<AdapterParceirosL
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterParceirosList.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterParceirosList.ViewHolder holder, final int position) {
 
-        holder.parceiroLogo.setImageResource(parceirosLogos.get(position));
-        holder.parceiroName.setText(parceirosNames.get(position));
-        holder.parceiroMOTD.setText(parceirosMOTDs.get(position));
-        holder.parceiroRating.setText(parceirosRatings.get(position) + "★");
+        holder.parceiroLogo.setImageResource(partnersList.get(position).getPartnerImage());
+        holder.parceiroName.setText(partnersList.get(position).getPartnerName());
+        holder.parceiroMOTD.setText(partnersList.get(position).getPartnerDescription());
+        holder.parceiroRating.setText(partnersList.get(position).getPartnerRating() + "★");
 
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fr = new ParceiroDetailsFragment();
+                Fragment fr = new ParceiroDetailsFragment(partnersList.get(position));
                 FragmentChangeListener fc = (FragmentChangeListener) rootView.getContext();
                 fc.replaceFragment(fr);
             }
@@ -66,7 +61,7 @@ public class AdapterParceirosList extends RecyclerView.Adapter<AdapterParceirosL
 
     @Override
     public int getItemCount() {
-        return parceirosNames.size();
+        return partnersList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

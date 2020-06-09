@@ -15,6 +15,7 @@
         android:background="@drawable/banner_parceiro_background">
 
         <ImageView
+            android:id="@+id/parceiroDetailsImage"
             android:layout_width="115dp"
             android:layout_height="115dp"
             android:layout_centerHorizontal="true"

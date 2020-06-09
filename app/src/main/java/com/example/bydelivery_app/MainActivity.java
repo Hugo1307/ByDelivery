@@ -18,7 +18,6 @@ import com.example.bydelivery_app.fragments.OrdersFragment;
 import com.example.bydelivery_app.fragments.ParceirosFragment;
 import com.example.bydelivery_app.fragments.ProfileFragment;
 import com.example.bydelivery_app.handlers.FragmentChangeListener;
-import com.example.bydelivery_app.handlers.OrdinaryMethods;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends FragmentActivity implements FragmentChangeListener {
@@ -40,8 +39,6 @@ public class MainActivity extends FragmentActivity implements FragmentChangeList
                     new HomeFragment()).commit();
             bottomNav.setSelectedItemId(R.id.nav_home);
         }
-
-        OrdinaryMethods.addParceiro(R.drawable.burgerclassic_logo, "Burger Classic", "Um serviço de qualidade" ,2.1);
 
     }
 
@@ -84,13 +81,19 @@ public class MainActivity extends FragmentActivity implements FragmentChangeList
 
     @Override
     public void replaceFragment(Fragment fragment) {
-        currentFragment = fragment;
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        if (currentFragment != null) {
+            if (currentFragment.getClass() != fragment.getClass()) {
+                fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            }
+        }
         fragmentTransaction.replace(R.id.fragment_container, fragment, fragment.toString());
         fragmentTransaction.addToBackStack(fragment.toString());
         fragmentTransaction.commit();
+
+        currentFragment = fragment;
     }
 
 }
