@@ -1,6 +1,5 @@
 package com.example.bydelivery_app.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +18,6 @@ import java.util.List;
 
 public class AdapterProductsList extends RecyclerView.Adapter<AdapterProductsList.ViewHolder>{
 
-    private static final String TAG = "AdapterProductsList";
-
     private List<Produto> productsList;
 
     public AdapterProductsList(List<Produto> productsList) {
@@ -38,7 +35,6 @@ public class AdapterProductsList extends RecyclerView.Adapter<AdapterProductsLis
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        Log.d(TAG, "onBindViewHolder: called.");
 
         holder.productImage.setImageResource(productsList.get(position).getProductImage());
         holder.productImage.setClipToOutline(true);
@@ -66,8 +62,6 @@ public class AdapterProductsList extends RecyclerView.Adapter<AdapterProductsLis
         holder.productLayout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
-                Log.d(TAG, "onClick: clicked on: " + productsList.get(position).getProductName());
 
                 ProductsFragment.openProduct(productsList.get(position));
             }
