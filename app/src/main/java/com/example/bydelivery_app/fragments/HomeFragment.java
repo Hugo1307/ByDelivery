@@ -9,12 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.bydelivery_app.R;
+import com.example.bydelivery_app.handlers.ContasList;
 import com.example.bydelivery_app.handlers.FragmentChangeListener;
 import com.example.bydelivery_app.handlers.Pesquisa;
 import com.example.bydelivery_app.handlers.ProductsList;
@@ -39,12 +41,15 @@ public class HomeFragment extends Fragment {
         RelativeLayout outrosLayout = view.findViewById(R.id.category8);
         final AutoCompleteTextView searchBar = view.findViewById(R.id.homeSearchBar);
         ImageView searchButton = view.findViewById(R.id.homeSearchButton);
+        TextView moradaLabel = view.findViewById(R.id.homeMoradaLabel);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
                 android.R.layout.simple_expandable_list_item_1, ProductsList.getAllProductsNames());
 
 
         searchBar.setAdapter(adapter);
+
+        moradaLabel.setText(ContasList.getCurrentAccount().getMorada());
 
         comidaLayout.setOnClickListener(new View.OnClickListener() {
 
@@ -53,7 +58,7 @@ public class HomeFragment extends Fragment {
 
                 Log.d(TAG, "onClick: clicked");
 
-                Fragment fr = new ProductsFragment(ProductsList.getComida(), "Comida", R.drawable.food_banner);
+                Fragment fr = new ProductsFragment(ProductsList.getComida(), "Comida");
                 FragmentChangeListener fc = (FragmentChangeListener) getActivity();
                 fc.replaceFragment(fr);
             }
@@ -66,7 +71,7 @@ public class HomeFragment extends Fragment {
 
                 Log.d(TAG, "onClick: clicked");
 
-                Fragment fr = new ProductsFragment(ProductsList.getRoupa(), "Roupa", R.drawable.clothes_banner);
+                Fragment fr = new ProductsFragment(ProductsList.getRoupa(), "Roupa");
                 FragmentChangeListener fc = (FragmentChangeListener) getActivity();
                 fc.replaceFragment(fr);
             }
@@ -79,7 +84,7 @@ public class HomeFragment extends Fragment {
 
                 Log.d(TAG, "onClick: clicked");
 
-                Fragment fr = new ProductsFragment(ProductsList.getFarmacia(), "Farmácia", R.drawable.azul);
+                Fragment fr = new ProductsFragment(ProductsList.getFarmacia(), "Farmácia");
                 FragmentChangeListener fc = (FragmentChangeListener) getActivity();
                 fc.replaceFragment(fr);
             }

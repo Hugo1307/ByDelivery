@@ -1,10 +1,15 @@
 package com.example.bydelivery_app.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class CartFragment extends Fragment {
 
@@ -89,6 +95,13 @@ public class CartFragment extends Fragment {
                 Date dataPrevista = dataPrevistaCal.getTime();
 
                 if (Carrinho.getCartProducts().size() != 0) {
+                    if (EncomendasList.getListaEncomendas().size() > 4) {
+                        Date primeiraData = EncomendasList.getListaEncomendas().get(0).getDeliveryDate();
+                        if (getDateDiff(primeiraData, dataAtual, TimeUnit.MINUTES) < 5) {
+                            showPopupWindow(rootView, false);
+                            return;
+                        }
+                    }
 
                     boolean isExpressDelivery;
 
@@ -99,10 +112,20 @@ public class CartFragment extends Fragment {
                     }
 
                     EncomendasList.addEncomenda(new Encomenda(new ArrayList<Produto>(Carrinho.getCartProducts()),
-                            dataAtual, dataPrevista, isExpressDelivery));
+                            dataAtual, dataPrevista, isExpressDelivery, Carrinho.getTotalPVPPrice(), 1));
 
                     clearCart(cartRecycler);
-                    Toast.makeText(getContext(), "Encomenda requisitada", Toast.LENGTH_SHORT).show();
+                    showPopupWindow(rootView, true);
+
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getContext(), "Encomenda requisitada", Toast.LENGTH_SHORT).show();
+                        }
+                    }, 2000);
+
+
                 }else{
                     Toast.makeText(getContext(), "Tente adicionar alguns produtos primeiro.", Toast.LENGTH_SHORT).show();
                 }
@@ -153,5 +176,57 @@ public class CartFragment extends Fragment {
         updatePriceEvaluation(0,0,0,0);
         rootView.findViewById(R.id.emptyCart).setVisibility(View.VISIBLE);
     }
+
+    public final void showPopupWindow(View view, boolean accepted) {
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View popupView = inflater.inflate(R.layout.layout_popup, null);
+
+        // create the popup window
+        int width = 500;
+        int height = 500;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        TextView label = popupView.findViewById(R.id.popupLabel1);
+        ImageView popupImg = popupView.findViewById(R.id.popupCheckImg);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        if (accepted) {
+            label.setText("Compra autorizada");
+            popupImg.setImageResource(R.drawable.ic_check_black_24dp);
+        }else{
+            label.setText("Compra recusada");
+            popupImg.setImageResource(R.drawable.ic_close_black_24dp);
+        }
+
+        popupView.setAlpha(0);
+        popupView.animate().setDuration(500).alpha(1);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                popupView.animate().setDuration(500).alpha(0).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        popupView.setVisibility(View.GONE);
+                        popupWindow.dismiss();
+                    }
+                });
+            }
+        }, 2000);
+
+    }
+
+    private static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diffInMillies = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
+    }
+
 
 }

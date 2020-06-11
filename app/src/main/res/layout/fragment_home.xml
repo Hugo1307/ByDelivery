@@ -492,6 +492,7 @@
             android:src="@drawable/ic_location_on_black_24dp"/>
 
         <TextView
+            android:id="@+id/homeMoradaLabel"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/homeBottomLocationIcon"

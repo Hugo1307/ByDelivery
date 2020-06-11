@@ -54,7 +54,7 @@ public class ProductDetailsFragment extends Fragment {
         labelProductSeller.setText(product.getProductSeller());
         labelProductDescription.setText(product.getProductDescription());
         labelProductWeight.setText(String.valueOf(product.getProductWeight()) + " g");
-        labelProductSize.setText(String.valueOf(product.getProductSize()));
+
         productRatingBar.setRating((float)product.getProductRating());
 
         productRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -86,6 +86,8 @@ public class ProductDetailsFragment extends Fragment {
                 OrdinaryMethods.addNotification(product.getProductImage(), product.getProductName(),
                         "Novo produto adicionado ao carrinho",
                         currentTime.getHours() + ":" + String.format("%02d", currentTime.getMinutes()));
+
+                Toast.makeText(getContext(), "Produto adicionaado ao carrinho", Toast.LENGTH_SHORT).show();
 
             }
         });

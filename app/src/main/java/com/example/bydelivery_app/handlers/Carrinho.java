@@ -35,7 +35,7 @@ public abstract class Carrinho {
             totalProductsPrice += p.getProductPrice() * p.getProductQuantity();
         }
 
-        return totalProductsPrice;
+        return NewMath.round(totalProductsPrice, 2);
     }
 
     public static double getTotalPVPPrice(){
@@ -45,11 +45,11 @@ public abstract class Carrinho {
         totalPrice += getProductsPVPPrice();
         totalPrice += Carrinho.deliveryPrice;
 
-        return totalPrice;
+        return NewMath.round(totalPrice, 2);
     }
 
     public static double getOrderIVA(){
-        return getTotalPVPPrice() * 0.23;
+        return NewMath.round(getTotalPVPPrice() * 0.23, 2);
     }
 
     public static void addProduct(Produto p){

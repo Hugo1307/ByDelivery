@@ -12,15 +12,19 @@ public class Encomenda {
     private Date deliveryDate;
     private Date deliveryPrevision;
     private boolean expressDelivery;
+    private double deliveryPrice;
+    private int deliveryState;              // 0 - Em preparação; 1 - Em Trânsito; 2 - Entregue
 
-    public Encomenda(List<Produto> productsList, Date deliveryDate, Date deliveryPrevision, boolean expressDelivery) {
-        Encomenda.id++;
+    public Encomenda(List<Produto> productsList, Date deliveryDate, Date deliveryPrevision, boolean expressDelivery, double deliveryPrice, int deliveryState) {
+        id++;
 
+        this.deliveryId = id;
         this.productsList = productsList;
-        this.deliveryId = Encomenda.id;
         this.deliveryDate = deliveryDate;
         this.deliveryPrevision = deliveryPrevision;
         this.expressDelivery = expressDelivery;
+        this.deliveryPrice = deliveryPrice;
+        this.deliveryState = deliveryState;
     }
 
     public List<Produto> getProductsList() {
@@ -49,6 +53,18 @@ public class Encomenda {
 
     public boolean isExpressDelivery(){
         return expressDelivery;
+    }
+
+    public double getDeliveryPrice() {
+        return deliveryPrice;
+    }
+
+    public int getDeliveryState() {
+        return deliveryState;
+    }
+
+    public void setDeliveryState(int deliveryState) {
+        this.deliveryState = deliveryState;
     }
 
     @Override

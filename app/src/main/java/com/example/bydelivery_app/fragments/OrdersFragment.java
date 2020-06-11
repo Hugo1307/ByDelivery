@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bydelivery_app.R;
 import com.example.bydelivery_app.adapters.AdapterOrdersList;
+import com.example.bydelivery_app.handlers.Encomenda;
 import com.example.bydelivery_app.handlers.EncomendasList;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -66,9 +67,22 @@ public class OrdersFragment extends Fragment {
     }
 
     private void clearOrders(RecyclerView ordersRecycler) {
-        EncomendasList.clear();
-        Objects.requireNonNull(ordersRecycler.getAdapter()).notifyDataSetChanged();
-        //rootView.findViewById(R.id.emptyCart).setVisibility(View.VISIBLE);
+
+        boolean canCancel = true;
+        for (Encomenda e : EncomendasList.getListaEncomendas()) {
+            if (e.getDeliveryState() != 1) {
+                canCancel = false;
+                break;
+            }
+        }
+
+        if (canCancel) {
+            EncomendasList.clear();
+            Objects.requireNonNull(ordersRecycler.getAdapter()).notifyDataSetChanged();
+        }else{
+            Toast.makeText(getContext(), "Não é possível cancelar todas as encomendas", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 }

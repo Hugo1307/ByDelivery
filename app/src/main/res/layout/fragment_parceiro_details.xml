@@ -16,10 +16,10 @@
 
         <ImageView
             android:id="@+id/parceiroDetailsImage"
-            android:layout_width="115dp"
-            android:layout_height="115dp"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:src="@drawable/burgerclassic_logo"/>
 
     </RelativeLayout>

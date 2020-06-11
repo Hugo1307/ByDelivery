@@ -6,13 +6,14 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class LoginActivity extends AppCompatActivity {
+import com.example.bydelivery_app.handlers.Conta;
+import com.example.bydelivery_app.handlers.ContasList;
 
-    private String clientEmail = "";
-    private String clientPassword = "";
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,21 +25,28 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public String getClientEmail(){return clientEmail;}
-
     public void efetuarLogin(View v){
-
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
 
         EditText textBoxEmail = (EditText) findViewById(R.id.textbox_login_email);
         EditText textBoxPassword = (EditText) findViewById(R.id.textbox_login_password);
+        boolean wrongCredentials = false;
 
-        clientEmail = textBoxEmail.getText().toString();
-        clientPassword = textBoxPassword.getText().toString();
+        for (Conta c : ContasList.getAllAccounts()){
 
-        this.finish();
+            if (c.getEmail().equals(textBoxEmail.getText().toString())) {
+                if (c.getPassword().equals(textBoxPassword.getText().toString())) {
+                    Intent intent = new Intent(this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    ContasList.setCurrentAccount(c);
+                    this.finish();
+                    return;
+                }
+            }
+
+        }
+
+        Toast.makeText(this, "Credenciais inválidas", Toast.LENGTH_SHORT).show();
 
     }
 

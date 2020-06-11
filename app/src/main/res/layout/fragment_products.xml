@@ -12,9 +12,10 @@
         app:layout_constraintHeight_percent="0.28"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:background="@drawable/food_banner">
+        android:background="@drawable/azul">
 
         <ImageView
+            android:id="@+id/productsListWaves"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_alignParentBottom="true"
@@ -29,11 +30,7 @@
             android:fontFamily="@font/chewy"
             android:textSize="50sp"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="60dp"
-            android:shadowColor="#646464"
-            android:shadowDx="-5"
-            android:shadowDy="-5"
-            android:shadowRadius="5"
+            android:layout_marginTop="45dp"
             android:text="[Teste]"/>
 
     </RelativeLayout>
@@ -41,8 +38,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent=".72"
-        app:layout_constraintTop_toBottomOf="@id/productsListLayout1">
+        app:layout_constraintTop_toBottomOf="@id/productsListLayout1"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/productsListRecyclerView"

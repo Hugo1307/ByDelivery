@@ -17,7 +17,11 @@ import com.example.bydelivery_app.R;
 import com.example.bydelivery_app.handlers.Encomenda;
 import com.example.bydelivery_app.handlers.EncomendasList;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -48,12 +52,36 @@ public class AdapterOrdersList extends RecyclerView.Adapter<AdapterOrdersList.Vi
 
         holder.orderName.setText("Encomenda #" + orders.get(position).getDeliveryId());
 
+        Date currentDate = Calendar.getInstance(TimeZone.getDefault()).getTime();
+
+        if (getDateDiff(orders.get(position).getDeliveryDate(), currentDate, TimeUnit.MINUTES) >= 3) {
+            orders.get(position).setDeliveryState(2);
+        }
+
+        if (getDateDiff(orders.get(position).getDeliveryDate(), currentDate, TimeUnit.MINUTES) >=
+                getDateDiff(orders.get(position).getDeliveryDate(), orders.get(position).getDeliveryPrevision(), TimeUnit.MINUTES)) {
+            orders.get(position).setDeliveryState(3);
+        }
+
+        switch (orders.get(position).getDeliveryState()){
+            case 1:
+                holder.orderStatus.setText("Em preparação");
+                break;
+            case 2:
+                holder.orderStatus.setText("Em trânsito");
+                break;
+            case 3:
+                holder.orderStatus.setText("Entregue");
+                break;
+        }
+
         if (orders.get(position).getProductsList().size() >= 1) {
             holder.orderImage.setImageResource(orders.get(position).getProductsList().get(0).getProductImage());
         }
 
         holder.orderDate.setText(String.format("%02d:%02d", orders.get(position).getDeliveryDate().getHours(), orders.get(position).getDeliveryDate().getMinutes()));
         holder.orderPrevision.setText(String.format("%02d:%02d", orders.get(position).getDeliveryPrevision().getHours(), orders.get(position).getDeliveryPrevision().getMinutes()));
+        holder.orderPrice.setText(orders.get(position).getDeliveryPrice() + "€");
 
         if (orders.get(position).isExpressDelivery()) {
             holder.orderDeliveryType.setVisibility(View.VISIBLE);
@@ -64,8 +92,15 @@ public class AdapterOrdersList extends RecyclerView.Adapter<AdapterOrdersList.Vi
         holder.orderCancel.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                EncomendasList.removeEncomenda(position);
-                notifyDataSetChanged();
+
+                if (orders.get(position).getDeliveryState() == 1) {
+                    EncomendasList.removeEncomenda(position);
+                    notifyDataSetChanged();
+                    Toast.makeText(rootView.getContext(), "Cancelamento efetuado com sucesso", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(rootView.getContext(), "Já não é possível cancelar a encomenda", Toast.LENGTH_SHORT).show();
+                }
+
                 return true;
             }
         });
@@ -84,7 +119,7 @@ public class AdapterOrdersList extends RecyclerView.Adapter<AdapterOrdersList.Vi
                 if (holder.mainLayout.getHeight() > holder.topLayout.getHeight()) {
                     transform(holder.mainLayout, 800, holder.topLayout.getHeight());
                 }else{
-                    transform(holder.mainLayout, 800, 675);
+                    transform(holder.mainLayout, 800, 875);
                 }
 
             }
@@ -113,14 +148,22 @@ public class AdapterOrdersList extends RecyclerView.Adapter<AdapterOrdersList.Vi
         valueAnimator.start();
     }
 
+    private static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diffInMillies = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
+    }
+
+
     class ViewHolder extends RecyclerView.ViewHolder{
 
         RelativeLayout mainLayout;
         RelativeLayout topLayout;
         CircleImageView orderImage;
+        TextView orderStatus;
         TextView orderName;
         TextView orderDate;
         TextView orderPrevision;
+        TextView orderPrice;
         ImageView orderMoreInfo;
         ImageView orderCancel;
         ImageView orderDeliveryType;
@@ -128,6 +171,7 @@ public class AdapterOrdersList extends RecyclerView.Adapter<AdapterOrdersList.Vi
         ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            orderStatus = itemView.findViewById(R.id.ordersItemEstadoPedido);
             mainLayout = itemView.findViewById(R.id.ordersItemMainLayout);
             topLayout = itemView.findViewById(R.id.ordersItemLayout1);
             orderImage = itemView.findViewById(R.id.ordersProductImage);
@@ -136,6 +180,7 @@ public class AdapterOrdersList extends RecyclerView.Adapter<AdapterOrdersList.Vi
             orderCancel = itemView.findViewById(R.id.ordersCancelOrderIcon);
             orderDate = itemView.findViewById(R.id.ordersItemDataPedido);
             orderPrevision = itemView.findViewById(R.id.ordersItemPedidoPrevisao);
+            orderPrice = itemView.findViewById(R.id.ordersItemPedidoPreco);
             orderDeliveryType = itemView.findViewById(R.id.ordersItemDeliveryType);
         }
 

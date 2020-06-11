@@ -14,6 +14,9 @@ public abstract class ProductsList {
     private static String frangoDescription = "Deguste o nosso frango churrasco. Para os verdadeiros amantes de frango!";
     private static String lasanhaDescription = "A Lasanha da Itzza Pitzza é composta por uma deliciosa massa, recheada com molho à bolonhesa, carne moída e presunto, coberta com molho branco e mussarela.\n Irresistível!";
     private static String pizzaDescription = "A pizza da Itzza Pitzza mergulha nos melhores sabores da gastronomia italiana!";
+    private static String cachorroDescription = "Os cachorros quentes da Burger classic são os melhores do mercado. Pode escolher entre 3 variedades de pão diferentes: \n• Normal \n• Integral \n• Mistura";
+    private static String francesinhaDescription = "As nossas francesinhas são preparadas com queijo Gouda e fiambre de peru para que possa desfrutar de todo o sabor de uma francesinha da forma mais saudável possível. Tudo isto, sem abdicar do sabor!";
+    private static String paochouricoDescription = "Preparamos os melhores pães com chouriço para lhe entregar o mlehor que podemos oferecer. Pode escolher entre 2 tipos de pão diferentes: \n• Normal \n• Integral";
     private static String casacoDescription = "Casaco quente de gola alta, com pele de carneiro para o Inverno";
     private static String sapatosDescription = "Sapatos confortáveis de tamanho 44 de linhagem";
     private static String calcasDescription = "Calças de ganga azul para mulher\n tamanho 38";
@@ -31,9 +34,12 @@ public abstract class ProductsList {
             new Comida("Frango Churrasco", "O Churrasco", frangoDescription, R.drawable.frango_banner, 1, 5.60, 3.7, 800, 250),
             new Comida("Bifana", "Restaurante Sol", bifanaDescription, R.drawable.binafa_banner, 1, 7.50, 4.8, 190, 200),
             new Comida("Pizza", "Itzza Pitzza", pizzaDescription, R.drawable.pizza_banner, 1, 7.50, 4.3, 150, 200),
-            new Comida("Hambúrguer", "Burguer Classic", hamburguerDescription, R.drawable.hamburguer_banner, 1, 4.99, 4.2, 250, 100),
+            new Comida("Hambúrguer", "Burger Classic", hamburguerDescription, R.drawable.hamburguer_banner, 1, 4.99, 4.2, 250, 100),
             new Comida("Sushi", "Sushi Sentido", sushiDescription, R.drawable.sushi_banner, 1, 9.49, 5.0, 300, 250),
-            new Comida("Lasanha", "Itzza Pitzza", lasanhaDescription, R.drawable.lasanha_banner, 1, 6.80, 4.0, 200, 150)));
+            new Comida("Lasanha", "Itzza Pitzza", lasanhaDescription, R.drawable.lasanha_banner, 1, 6.80, 4.0, 200, 150),
+            new Comida("Cachorro quente", "Burger Classic", cachorroDescription, R.drawable.hotdog_banner, 1, 4.90, 4.0, 250, 150),
+            new Comida("Francesinha", "Restaurante Sol", francesinhaDescription, R.drawable.francesinha_banner, 1, 6.99, 3.4, 450, 150),
+            new Comida("Pão com chouriço", "O Churrasco", paochouricoDescription, R.drawable.pao_chourico_banner, 1, 5.00, 4.2, 180, 150)));
 
     private static List<Roupa> roupa = new ArrayList<>(Arrays.asList(
             new Roupa("Casaco", "Santo Cabide", casacoDescription, R.drawable.casaco_banner, 1, 15.99, 3.0, 1200,"L"),
