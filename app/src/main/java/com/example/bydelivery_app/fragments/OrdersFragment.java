@@ -1,7 +1,6 @@
 package com.example.bydelivery_app.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +22,11 @@ import java.util.Objects;
 
 public class OrdersFragment extends Fragment {
 
-    private static final String TAG = "OrdersFragment";
     private View rootView;
     
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        Log.d(TAG, "onCreate: started");
 
         View view = inflater.inflate(R.layout.fragment_orders, null);
         final FloatingActionButton cancelOrdersBtn = view.findViewById(R.id.ordersCancelAll);
@@ -59,7 +55,6 @@ public class OrdersFragment extends Fragment {
     }
 
     private void initRecyclerView(){
-        Log.d(TAG, "initRecyclerView: init recyclerview");
         RecyclerView recycler = rootView.findViewById(R.id.ordersRecyclerView);
         AdapterOrdersList adapter = new AdapterOrdersList();
         recycler.setAdapter(adapter);

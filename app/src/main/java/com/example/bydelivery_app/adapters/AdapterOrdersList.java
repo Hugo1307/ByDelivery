@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bydelivery_app.R;
 import com.example.bydelivery_app.handlers.Encomenda;
 import com.example.bydelivery_app.handlers.EncomendasList;
+import com.example.bydelivery_app.handlers.OrdinaryMethods;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -27,10 +28,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AdapterOrdersList extends RecyclerView.Adapter<AdapterOrdersList.ViewHolder> {
 
-    private static final String TAG = "AdapterOrdersList";
-    
-    List<Encomenda> orders;
-    View rootView;
+    private List<Encomenda> orders;
+    private View rootView;
 
     public AdapterOrdersList() {
         this.orders = EncomendasList.getListaEncomendas();
@@ -66,12 +65,21 @@ public class AdapterOrdersList extends RecyclerView.Adapter<AdapterOrdersList.Vi
         switch (orders.get(position).getDeliveryState()){
             case 1:
                 holder.orderStatus.setText("Em preparação");
+                OrdinaryMethods.addNotification(orders.get(position).getProductsList().get(0).getProductImage(),
+                        "Encomenda #" + orders.get(position).getDeliveryId(), "A encomenda entrontra-se em preparação",
+                        String.format("%02d:%02d", currentDate.getHours(), currentDate.getMinutes()));
                 break;
             case 2:
                 holder.orderStatus.setText("Em trânsito");
+                OrdinaryMethods.addNotification(orders.get(position).getProductsList().get(0).getProductImage(),
+                        "Encomenda #" + orders.get(position).getDeliveryId(), "A encomenda entrontra-se em trânsito",
+                        String.format("%02d:%02d", currentDate.getHours(), currentDate.getMinutes()));
                 break;
             case 3:
                 holder.orderStatus.setText("Entregue");
+                OrdinaryMethods.addNotification(orders.get(position).getProductsList().get(0).getProductImage(),
+                        "Entrega #" + orders.get(position).getDeliveryId(), "A encomenda foi entregue",
+                        String.format("%02d:%02d", currentDate.getHours(), currentDate.getMinutes()));
                 break;
         }
 

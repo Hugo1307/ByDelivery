@@ -11,15 +11,19 @@
         android:layout_height="0dp"
         app:layout_constraintHeight_percent=".20"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent">
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@drawable/azul">
 
         <ImageView
+            android:id="@+id/parceirosWaves"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/azul_login_waved_small"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/waves"
             android:scaleType="fitXY"/>
 
         <TextView
+            android:id="@+id/parceiroTitleLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"

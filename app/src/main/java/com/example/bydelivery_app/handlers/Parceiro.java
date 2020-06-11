@@ -3,7 +3,7 @@ package com.example.bydelivery_app.handlers;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Parceiro {
+public class Parceiro implements Comparable<Parceiro> {
 
     private static int id = 0;
     private int partnerId;
@@ -52,8 +52,26 @@ public class Parceiro {
         return partnerDescription;
     }
 
-    public Double getPartnerRating() {
-        return partnerRating;
+    public double getPartnerRating() {
+
+        double ratingCount = 0;
+        double totalRatings = 0;
+
+        for (Produto p : ProductsList.getAllProducts()) {
+            if (p.getProductSeller().equalsIgnoreCase(partnerName)) {
+                totalRatings += p.getProductRating();
+                ratingCount++;
+            }
+        }
+
+        if (ratingCount != 0) {
+            return NewMath.round((totalRatings / ratingCount), 1);
+        }else{
+            return 0;
+        }
+
+
+
     }
 
     public String getPartnerLocation() {
@@ -74,5 +92,10 @@ public class Parceiro {
 
     public void setPartnerRating(Double partnerRating) {
         this.partnerRating = partnerRating;
+    }
+
+    @Override
+    public int compareTo(Parceiro o) {
+        return this.partnerName.compareTo(o.getPartnerName());
     }
 }

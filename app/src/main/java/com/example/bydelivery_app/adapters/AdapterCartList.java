@@ -1,6 +1,5 @@
 package com.example.bydelivery_app.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +22,6 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AdapterCartList extends RecyclerView.Adapter<AdapterCartList.ViewHolder>{
-
-    private static final String TAG = "AdapterCartList";
 
     private View rootView;
     private List<Produto> products;
@@ -49,7 +46,6 @@ public class AdapterCartList extends RecyclerView.Adapter<AdapterCartList.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        Log.d(TAG, "onBindViewHolder: called.");
 
         holder.image.setImageResource(products.get(position).getProductImage());
         holder.productName.setText(products.get(position).getProductName());
@@ -60,8 +56,6 @@ public class AdapterCartList extends RecyclerView.Adapter<AdapterCartList.ViewHo
         holder.productDelete.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View v) {
-
-                Log.d(TAG, "onLongClick: clicked on: " + products.get(position).getProductName());
 
                 products.remove(position);
                 notifyItemRemoved(position);
@@ -75,7 +69,6 @@ public class AdapterCartList extends RecyclerView.Adapter<AdapterCartList.ViewHo
         holder.productDelete.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on: " + position);
                 Toast.makeText(rootView.getContext(), "Mantenha pressionado para eliminar", Toast.LENGTH_SHORT).show();
             }
         });
@@ -83,7 +76,6 @@ public class AdapterCartList extends RecyclerView.Adapter<AdapterCartList.ViewHo
         holder.addQuantity.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: addQuantity: " + position);
 
                 products.get(position).add();
                 notifyItemChanged(position);
@@ -93,8 +85,6 @@ public class AdapterCartList extends RecyclerView.Adapter<AdapterCartList.ViewHo
         holder.removeQuantity.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
-                Log.d(TAG, "onClick: removeQuantity: " + position);
 
                 if (products.get(position).getProductQuantity() > 1) {
                     products.get(position).remove();

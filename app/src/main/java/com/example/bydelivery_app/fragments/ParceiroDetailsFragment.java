@@ -1,7 +1,6 @@
 package com.example.bydelivery_app.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ParceiroDetailsFragment extends Fragment {
 
-    private static final String TAG = "OrdersFragment";
     private View rootView;
     private Parceiro partner;
 
@@ -66,8 +64,6 @@ public class ParceiroDetailsFragment extends Fragment {
                 fc.replaceFragment(fr);
             }
         });
-
-        Log.d(TAG, "onCreate: started");
 
         return view;
     }

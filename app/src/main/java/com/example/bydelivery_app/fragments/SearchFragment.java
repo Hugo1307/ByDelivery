@@ -1,7 +1,6 @@
 package com.example.bydelivery_app.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,6 @@ import java.util.List;
 
 public class SearchFragment extends Fragment {
 
-    private static final String TAG = "SearchFragment";
     private static View rootView;
     private List<Produto> searchResults;
 
@@ -68,7 +66,6 @@ public class SearchFragment extends Fragment {
     }
 
     private void initRecyclerView(){
-        Log.d(TAG, "initRecyclerView: init recyclerview");
         RecyclerView recycler = rootView.findViewById(R.id.searchRecyclerView);
 
         AdapterSearchList adapter = new AdapterSearchList(searchResults);

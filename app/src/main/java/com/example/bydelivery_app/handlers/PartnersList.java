@@ -5,6 +5,7 @@ import com.example.bydelivery_app.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimeZone;
@@ -56,6 +57,7 @@ public abstract class PartnersList {
                     new GregorianCalendar(currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DAY_OF_MONTH), 24, 0).getTime())
     ));
     public static List<Parceiro> getPartnersList() {
+        Collections.sort(partnersList);
         return partnersList;
     }
 }

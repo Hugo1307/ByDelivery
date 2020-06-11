@@ -2,7 +2,7 @@ package com.example.bydelivery_app.handlers;
 
 import java.util.Objects;
 
-public class Produto {
+public class Produto implements Comparable<Produto>{
 
     private static int id = 0;
     private int productId;
@@ -92,6 +92,10 @@ public class Produto {
         return productRating;
     }
 
+    public void addProductRating(double rating){
+        productRating = (productRating + rating) / 2;
+    }
+
     public void add(int q){
         this.productQuantity += q;
     }
@@ -126,5 +130,10 @@ public class Produto {
     @Override
     public int hashCode() {
         return Objects.hash(productName, productSeller, productImage, productPrice);
+    }
+
+    @Override
+    public int compareTo(Produto o) {
+        return this.getProductName().compareTo((o.getProductName()));
     }
 }

@@ -3,7 +3,6 @@ package com.example.bydelivery_app.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,13 +34,10 @@ import java.util.concurrent.TimeUnit;
 
 public class CartFragment extends Fragment {
 
-    private static final String TAG = "CartFragment";
     private static View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        Log.d(TAG, "onCreate: started");
 
         View view = inflater.inflate(R.layout.fragment_cart, null);
         final RelativeLayout panelEntregaNormal = view.findViewById(R.id.cartChoosePanel_EntregaNormal);
@@ -138,8 +134,6 @@ public class CartFragment extends Fragment {
     }
 
     public static void updatePriceEvaluation(double totalPrice, double iva, double deliveryPrice, double productsTotalPrice){
-
-        Log.d(TAG, "updatePriceEvaluation: called");
         
         TextView labelTotalPrice = rootView.findViewById(R.id.label_totalPrice);
         TextView labelDeliveryPrice = rootView.findViewById(R.id.label_entregaPrice);
@@ -162,7 +156,6 @@ public class CartFragment extends Fragment {
     }
 
     private void initRecyclerView(){
-        Log.d(TAG, "initRecyclerView: init recyclerview");
         RecyclerView recycler = rootView.findViewById(R.id.cartRecyclerView);
         AdapterCartList adapter = new AdapterCartList();
         recycler.setAdapter(adapter);

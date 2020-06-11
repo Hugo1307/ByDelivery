@@ -1,7 +1,6 @@
 package com.example.bydelivery_app.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +21,6 @@ import com.example.bydelivery_app.handlers.Pesquisa;
 import com.example.bydelivery_app.handlers.ProductsList;
 
 public class HomeFragment extends Fragment {
-
-    private static final String TAG = "HomeFragment";
     
     @Nullable
     @Override
@@ -56,8 +53,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Log.d(TAG, "onClick: clicked");
-
                 Fragment fr = new ProductsFragment(ProductsList.getComida(), "Comida");
                 FragmentChangeListener fc = (FragmentChangeListener) getActivity();
                 fc.replaceFragment(fr);
@@ -69,8 +64,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Log.d(TAG, "onClick: clicked");
-
                 Fragment fr = new ProductsFragment(ProductsList.getRoupa(), "Roupa");
                 FragmentChangeListener fc = (FragmentChangeListener) getActivity();
                 fc.replaceFragment(fr);
@@ -81,8 +74,6 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-
-                Log.d(TAG, "onClick: clicked");
 
                 Fragment fr = new ProductsFragment(ProductsList.getFarmacia(), "Farmácia");
                 FragmentChangeListener fc = (FragmentChangeListener) getActivity();

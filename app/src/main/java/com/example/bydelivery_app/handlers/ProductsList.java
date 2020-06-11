@@ -4,6 +4,7 @@ import com.example.bydelivery_app.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class ProductsList {
@@ -60,15 +61,21 @@ public abstract class ProductsList {
             ));
 
     public static List<Produto> getComida() {
-        return new ArrayList<Produto>(comida);
+        List<Produto> returnList = new ArrayList<Produto>(comida);
+        Collections.sort(returnList);
+        return returnList;
     }
 
     public static List<Produto> getRoupa() {
-        return new ArrayList<Produto>(roupa);
+        List<Produto> returnList = new ArrayList<Produto>(roupa);
+        Collections.sort(returnList);
+        return returnList;
     }
 
     public static List<Produto> getFarmacia() {
-        return new ArrayList<Produto>(farmacia);
+        List<Produto> returnList = new ArrayList<Produto>(farmacia);
+        Collections.sort(returnList);
+        return returnList;
     }
 
     public static List<Produto> getAllProducts(){
@@ -77,6 +84,8 @@ public abstract class ProductsList {
         allProducts.addAll(comida);
         allProducts.addAll(roupa);
         allProducts.addAll(farmacia);
+
+        Collections.sort(allProducts);
 
         return allProducts;
     }

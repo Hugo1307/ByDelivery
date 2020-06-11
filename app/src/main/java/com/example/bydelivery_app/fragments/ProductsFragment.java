@@ -2,7 +2,6 @@ package com.example.bydelivery_app.fragments;
 
 import android.animation.ValueAnimator;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +28,6 @@ import java.util.concurrent.ScheduledExecutorService;
 
 public class ProductsFragment extends Fragment {
 
-    private static final String TAG = "ProductsFragment";
-
     private static View rootView;
     private List<Produto> productsList = ProductsList.getAllProducts();
     private String categoria;
@@ -56,8 +53,6 @@ public class ProductsFragment extends Fragment {
         recycler.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-
-                Log.d(TAG, "onScrollChange: scrollY" + recycler.getAdapter().getItemCount() + " oldScrollY" + oldScrollY);
 
                 if (recycler.getAdapter().getItemCount() > 6){
                     ViewGroup.MarginLayoutParams productNameMargins = (ViewGroup.MarginLayoutParams) categoryLabel.getLayoutParams();
@@ -96,7 +91,6 @@ public class ProductsFragment extends Fragment {
     }
 
     private void initRecyclerView(){
-        Log.d(TAG, "initRecyclerView: init recyclerview");
         RecyclerView recycler = rootView.findViewById(R.id.productsListRecyclerView);
 
         AdapterProductsList adapter = new AdapterProductsList(productsList);
@@ -113,7 +107,6 @@ public class ProductsFragment extends Fragment {
     }
 
     public void transform(final View v, int duration, int targetHeight) {
-        Log.d(TAG, "transform: called");
         int prevHeight  = v.getHeight();
         v.setVisibility(View.VISIBLE);
         ValueAnimator valueAnimator = ValueAnimator.ofInt(prevHeight, targetHeight);

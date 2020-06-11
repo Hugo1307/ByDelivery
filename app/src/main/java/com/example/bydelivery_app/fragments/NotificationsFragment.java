@@ -1,7 +1,6 @@
 package com.example.bydelivery_app.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class NotificationsFragment extends Fragment {
 
-    private static final String TAG = "NotificationsFragment";
     private View rootView;
     private RecyclerView recycler;
 
@@ -29,8 +27,6 @@ public class NotificationsFragment extends Fragment {
         FloatingActionButton btnClear = view.findViewById(R.id.notificationsClearBtn);
 
         rootView = view;
-
-        Log.d(TAG, "onCreate: started");
 
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +54,6 @@ public class NotificationsFragment extends Fragment {
     }
 
     private void initRecyclerView(){
-        Log.d(TAG, "initRecyclerView: init recyclerview");
         RecyclerView recycler = rootView.findViewById(R.id.notificationsRecyclerView);
         AdapterNotificationsList adapter = new AdapterNotificationsList();
         recycler.setAdapter(adapter);

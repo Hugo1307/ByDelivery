@@ -22,8 +22,6 @@ public class AdapterNotificationsList extends RecyclerView.Adapter<AdapterNotifi
     private ArrayList<String> notificationsBodyStrings;
     private ArrayList<String> notificationsHours;
     private boolean isNewNotification = true;
-
-    private static final String TAG = "AdapterNotificationsLis";
     
     public AdapterNotificationsList(){
 

@@ -1,7 +1,6 @@
 package com.example.bydelivery_app.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,6 @@ import java.util.Date;
 
 public class ProductDetailsFragment extends Fragment {
 
-    private static final String TAG = "ProductDetailsFragment";
     private View rootView;
     
     private Produto product;
@@ -67,11 +65,12 @@ public class ProductDetailsFragment extends Fragment {
                         canEvaluate = true;
                 }
 
-                if (!canEvaluate && fromUser) {
+                if (!canEvaluate) {
                     Toast.makeText(getContext(), "Só poderá avaliar depois de comprar", Toast.LENGTH_SHORT).show();
                     productRatingBar.setRating((float)product.getProductRating());
+                }else{
+                    product.addProductRating(rating);
                 }
-
             }
         });
 
@@ -79,15 +78,13 @@ public class ProductDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Log.d(TAG, "onClick: button clicked");
-
                 Carrinho.addProduct(product);
 
                 OrdinaryMethods.addNotification(product.getProductImage(), product.getProductName(),
                         "Novo produto adicionado ao carrinho",
                         currentTime.getHours() + ":" + String.format("%02d", currentTime.getMinutes()));
 
-                Toast.makeText(getContext(), "Produto adicionaado ao carrinho", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Produto adicionado ao carrinho", Toast.LENGTH_SHORT).show();
 
             }
         });

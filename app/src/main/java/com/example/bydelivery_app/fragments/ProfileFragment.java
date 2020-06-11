@@ -34,7 +34,6 @@ public class ProfileFragment extends Fragment {
     private boolean isFirstInstance = true;
     private boolean credentialsChanged = false;
     private boolean acceptChanges = true;
-    private static final String TAG = "ProfileFragment";
 
     @Nullable
     @Override
